@@ -36,24 +36,18 @@ async def generate_weekly_plan_endpoint(db: AsyncSession = Depends(get_async_db)
     return plan
 
 
-# --- YENİ ---
 @router.get("/get-daily-tasks", summary="Günlük Görevleri Getir veya Oluştur")
 async def get_daily_tasks_endpoint(db: AsyncSession = Depends(get_async_db),
                                    current_user: User = Depends(get_current_user)):
-    """
-    Kullanıcı için günlük görevleri getirir. Eğer o gün için görev yoksa, yenilerini oluşturur.
-    """
+
     tasks = await get_or_create_daily_tasks_service(user=current_user, db=db)
     return tasks
 
 
-# --- YENİ ---
 @router.post("/complete-daily-task/{task_id}", summary="Günlük Görevi Tamamlandı Olarak İşaretle")
 async def complete_daily_task_endpoint(task_id: int, db: AsyncSession = Depends(get_async_db),
                                        current_user: User = Depends(get_current_user)):
-    """
-    Belirtilen ID'ye sahip görevin tamamlanma durumunu günceller.
-    """
+
     query = select(DailyTask).where(DailyTask.id == task_id)
     result = await db.execute(query)
     task = result.scalars().first()
@@ -64,7 +58,6 @@ async def complete_daily_task_endpoint(task_id: int, db: AsyncSession = Depends(
     if task.user_id != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Bu işlemi yapma yetkiniz yok.")
 
-    # Durumu tersine çevir (işaretle / işareti kaldır)
     task.is_completed = not task.is_completed
     await db.commit()
     await db.refresh(task)
