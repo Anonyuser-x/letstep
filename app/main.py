@@ -79,17 +79,13 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
     if exc.status_code == 403:
         return templates.TemplateResponse("403.html", {"request": request}, status_code=403)
 
-    # Diğer HTTP hataları için varsayılan JSON yanıtını koruyabilirsiniz
     return JSONResponse(
         status_code=exc.status_code,
         content={"detail": exc.detail},
     )
 
-
-# Bu handler'ı ise beklenmedik 500 hataları için kullanın
 @app.exception_handler(Exception)
 async def generic_exception_handler(request: Request, exc: Exception):
-    # Bu loglama çok önemli, hatanın ne olduğunu konsolda görebilirsiniz
     print(f"Beklenmedik bir sunucu hatası oluştu (500): {exc}")
     import traceback
     traceback.print_exc()
@@ -103,7 +99,7 @@ async def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
 
 @app.get("/", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_index_page(request: Request, current_user: Optional[User] = Depends(get_current_user)):
+async def get_index(request: Request, current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return templates.TemplateResponse("login.html", {"request": request})
 
@@ -123,17 +119,15 @@ def get_access_token_from_cookie(request: Request) -> str | None:
     return request.cookies.get("access_token")
 
 @app.get("/admin-dashboard", response_class=HTMLResponse, tags=["Öğretmen Paneli"])
-async def get_admin_dashboard_page(request: Request, teacher: User = Depends(get_current_teacher_user)):
+async def get_admin_dashboard(request: Request, teacher: User = Depends(get_current_teacher_user)):
     return templates.TemplateResponse("index-html-with-teacher.html", {"request": request})
 
-
 @app.get("/admin-students", response_class=HTMLResponse, tags=["Öğretmen Paneli"])
-async def get_admin_students_page(request: Request, teacher: User = Depends(get_current_teacher_user)):
+async def get_admin_students(request: Request, teacher: User = Depends(get_current_teacher_user)):
     return templates.TemplateResponse("admin_students.html", {"request": request})
 
-
 @app.get("/admin-reports", response_class=HTMLResponse, tags=["Öğretmen Paneli"])
-async def get_admin_reports_page(
+async def get_admin_reports(
     request: Request,
     teacher: User = Depends(get_current_teacher_user),
     access_token: str | None = Depends(get_access_token_from_cookie)
@@ -149,7 +143,7 @@ async def get_admin_reports_page(
 
 
 @app.get("/login", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_login_page(request: Request, current_user: Optional[User] = Depends(get_current_user)):
+async def get_login(request: Request, current_user: Optional[User] = Depends(get_current_user)):
     if current_user:
         if current_user.role == "teacher":
             return RedirectResponse(url="/admin-dashboard", status_code=status.HTTP_303_SEE_OTHER)
@@ -163,7 +157,7 @@ async def get_login_page(request: Request, current_user: Optional[User] = Depend
     return response
 
 @app.get("/register", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_register_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_register(current_user: Optional[User] = Depends(get_current_user)):
     if current_user:
         return RedirectResponse(url="/dashboard", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -174,7 +168,7 @@ async def get_register_page(current_user: Optional[User] = Depends(get_current_u
     return response
 
 @app.get("/register-teacher", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_register_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_register_teacher(current_user: Optional[User] = Depends(get_current_user)):
     if current_user:
         return RedirectResponse(url="/dashboard", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -185,7 +179,7 @@ async def get_register_page(current_user: Optional[User] = Depends(get_current_u
     return response
 
 @app.get("/forgot-password", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_login_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_forgot_password(current_user: Optional[User] = Depends(get_current_user)):
     if current_user:
         return RedirectResponse(url="/dashboard", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -196,7 +190,7 @@ async def get_login_page(current_user: Optional[User] = Depends(get_current_user
     return response
 
 @app.get("/reset-password", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_reset_password_page(
+async def get_reset_password(
         request: Request,
         current_user: Optional[User] = Depends(get_current_user)):
 
@@ -219,7 +213,7 @@ async def get_reset_password_page(
     return response
 
 @app.get("/dashboard", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_dashboard_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_dashboard(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -232,7 +226,7 @@ async def get_dashboard_page(current_user: Optional[User] = Depends(get_current_
     return response
 
 @app.get("/okuma_asistani", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_okuma_asistani_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_okuma_asistani(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -246,7 +240,7 @@ async def get_okuma_asistani_page(current_user: Optional[User] = Depends(get_cur
 
 
 @app.get("/exercises", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_exercises_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_exercises(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -260,7 +254,7 @@ async def get_exercises_page(current_user: Optional[User] = Depends(get_current_
 
 
 @app.get("/akil-yurut", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_anlam_sec_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_akil_yurut(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -273,7 +267,7 @@ async def get_anlam_sec_page(current_user: Optional[User] = Depends(get_current_
     return response
 
 @app.get("/boslugu-doldur", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_boslugu_doldur_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_boslugu_doldur(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -287,7 +281,7 @@ async def get_boslugu_doldur_page(current_user: Optional[User] = Depends(get_cur
 
 
 @app.get("/hecelere-ayir", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_hecelere_ayir_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_hecelere_ayir(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -301,7 +295,7 @@ async def get_hecelere_ayir_page(current_user: Optional[User] = Depends(get_curr
 
 
 @app.get("/anlam-sec", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_anlam_sec(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -314,7 +308,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
     return response
 
 @app.get("/harf-karistirma", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_harf_karistirma(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -328,7 +322,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
 
 
 @app.get("/kod-kirici", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_kod_kirici(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -341,7 +335,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
     return response
 
 @app.get("/anlam-bagdastir", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_anlam_bagdastir(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -368,7 +362,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
 
 
 @app.get("/nesne-yonu-tanima", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_nesne_yonu_tanima(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -382,7 +376,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
 
 
 @app.get("/ilk-harfi-yakala", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_ilk_harfi_yakala(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -397,7 +391,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
 
 
 @app.get("/yon-takibi", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_yon_takibi(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -410,7 +404,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
     return response
 
 @app.get("/kelime-ses-uyum", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_kelime_ses_uyum(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -424,7 +418,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
 
 
 @app.get("/user-rapor", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_user_rapor(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -438,7 +432,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
 
 
 @app.get("/security-settings", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_security_settings(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -451,7 +445,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
     return response
 
 @app.get("/flashcard", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_flashcard(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -465,7 +459,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
 
 
 @app.get("/ai", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_ai(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -478,7 +472,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
     return response
 
 @app.get("/ai-recommendation", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_ai_recommendation(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -491,7 +485,7 @@ async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_curr
     return response
 
 @app.get("/ai-weekly", response_class=HTMLResponse, tags=["Sayfalar"])
-async def get_renk_siralama_page(current_user: Optional[User] = Depends(get_current_user)):
+async def get_ai_weekly(current_user: Optional[User] = Depends(get_current_user)):
     if not current_user:
         return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
