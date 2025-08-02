@@ -1,0 +1,57 @@
+      
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LetStep | Giriş Yap</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Kendi CSS Dosyamız (login.css'in adını auth.css olarak değiştirdiğinizi varsayıyorum) -->
+    <link rel="stylesheet" href="/static/css/auth.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+
+
+</head>
+<body>
+    <div class="login-page-wrapper">
+        <!-- Sol Taraf: Marka/Logo Alanı -->
+        <div class="login-branding-side">
+        </div>
+        <!-- Sağ Taraf: Form Alanı -->
+        <div class="login-form-side">
+            <a href="/" class="logo form-side-logo">Let<span>Step</span></a>
+            <div class="login-form-container">
+                <h2>Giriş Yap</h2>
+                <form id="login-form" method="post" novalidate> <!-- action'ı kaldırdık, JS halledecek -->
+                    <label id="login-email">E-posta veya Kullanıcı Adı</label>
+                    <!-- ÖNEMLİ: ID'yi değiştirdim, çünkü hem email hem kullanıcı adı alabilir -->
+                    <input type="text" id="login-username-email" name="username_or_email" placeholder="kullanici_adiniz veya example@mail.com" required autocomplete="username">
+
+                    <label for="login-password">Şifre</label>
+                    <input type="password" id="login-password" name="password" placeholder="Şifrenizi girin" required autocomplete="current-password" minlength="8">
+                    
+                    <!-- YENİ: Hata mesajları için alan -->
+                    <div id="error-message" class="error-message"></div>
+
+                    <button type="submit" class="btn btn-secondary">Giriş Yap</button>
+                    <a href="/register" class="btn btn-primary">Kayıt Ol</a>
+                    <div class="forgot-password-link">
+                        <a href="/forgot-password" class="btn btn-primary">Şifrenizi mi unuttunuz?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- YENİ: Kendi JS Dosyamız (sayfanın sonunda olmalı) -->
+    <script src="/static/js/auth.js"></script>
+</body>
+</html>
+
+    

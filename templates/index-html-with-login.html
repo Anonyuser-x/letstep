@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LetStep | Okumada Yeni Bir Adım</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (İkonlar için) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Kendi CSS Dosyamız -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- HEADER / ÜST BİLGİ -->
+    <header>
+        <div class="container">
+            <a href="/" class="logo">Let<span>Step</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/dashboard"><i class="fas fa-th-large"></i> Kontrol Paneli</a></li>
+                    <li><a href="#features">Özellikler</a></li>
+                    <li><a href="#how-it-works">Nasıl Çalışır?</a></li>
+                    <li><a href="#">Hakkımızda</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu-container">
+                <button id="user-menu-button" class="user-menu-button">
+                    <span id="user-menu-username">Kullanıcı</span>
+                </button>
+                <div id="user-menu-dropdown" class="user-menu-dropdown">
+                    <a href="/security-settings"><i class="fas fa-cog"></i> Güvenlik Ayarları</a>
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+            </div>
+            <div class="hamburger-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA GİRİŞ BÖLÜMÜ (HERO) -->
+    <section class="hero">
+        <div class="container">
+            <h1>Okumayı Adım Adım Keşfet.</h1>
+            <p>LetStep, yapay zeka destekli kişiselleştirilmiş egzersizlerle öğrenme yolculuğunuzda size eşlik eder.</p>
+            <a href="/register" class="btn btn-primary btn-large">Hemen Yolculuğuna Başla</a>
+        </div>
+    </section>
+
+    <!-- ÖZELLİKLER BÖLÜMÜ -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">LetStep'in Gücü</h2>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <i class="fas fa-brain"></i>
+                    <h3>Kişiselleştirilmiş Egzersizler</h3>
+                    <p>Yapay zeka, performansınızı analiz ederek sadece size özel, adaptif bir öğrenme programı oluşturur.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <i class="fas fa-book-open-reader"></i>
+                    <h3>Akıllı Okuma Asistanı</h3>
+                    <p>Metinleri disleksi dostu fontlar, renkler ve akıllı cetvel gibi araçlarla daha kolay okuyun.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Anlaşılır Gelişim Analizi</h3>
+                    <p>İlerlemenizi somut veriler ve anlaşılır grafiklerle takip ederek motivasyonunuzu her zaman yüksek tutun.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NASIL ÇALIŞIR BÖLÜMÜ -->
+    <section id="how-it-works" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Sadece 4 Adımda Başlayın</h2>
+            <div class="steps-container">
+                <div class="step animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <h3>Değerlendir</h3>
+                    <p>Kısa bir başlangıç testi ile mevcut okuma becerilerini belirleyelim.</p>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <h3>Kişiselleştir</h3>
+                    <p>Yapay zeka, sonuçlarınıza göre size özel bir yol haritası oluştursun.</p>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <h3>Pratik Yap</h3>
+                    <p>Eğlenceli ve interaktif egzersizlerle her gün düzenli pratik yapın.</p>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <h3>Gelişimi Gör</h3>
+                    <p>Raporlar ve analizlerle kat ettiğiniz yolu görün ve başarılarınızı kutlayın.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOTİVASYON SÖZÜ BÖLÜMÜ -->
+    <section class="testimonial">
+        <div class="container">
+            <blockquote>"Her harf, doğru yönde atılmış bir adımdır."</blockquote>
+        </div>
+    </section>
+
+    <!-- SON ÇAĞRI (FINAL CTA) BÖLÜMÜ -->
+    <section class="final-cta section">
+        <div class="container">
+            <h2 class="section-title">Potansiyelini Ortaya Çıkarmaya Hazır mısın?</h2>
+            <p>LetStep ile öğrenme serüvenine bugün katıl ve farkı hisset.</p>
+            <a href="/register" class="btn btn-primary btn-large">Ücretsiz Hesabını Oluştur</a>
+        </div>
+    </section>
+
+    <!-- FOOTER / ALT BİLGİ -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="/" class="logo">Let<span>Step</span></a>
+                <p>© 2025 LetStep | Yapay Zeka ve Teknoloji Akademisi Projesi. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Kendi JS Dosyamız -->
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/menus.js"></script>
+
+</body>
+</html>

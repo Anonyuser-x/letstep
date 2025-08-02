@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontrol Paneli | LetStep</title>
+    
+    <!-- Google Fonts (Anasayfa ile aynı) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (İkonlar için) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Ana CSS Dosyamız (Aynı dosyayı kullanacağız) -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- DASHBOARD HEADER -->
+    <header class="dashboard-header">
+        <div class="container">
+            <a href="/" class="logo">Let<span>Step</span></a>
+            <nav class="dashboard-nav">
+                <a href="/flashcard"><i class="fas fa-th-large"></i> Kelime Asistanı</a>
+                <a href="/dashboard"><i class="fas fa-th-large"></i> Kontrol Paneli</a>
+                <!-- Cartoon Network linki, yeni sekmede açılacak -->
+                <a href="https://www.cartoonnetwork.com.tr/izle" target="_blank"><i class="fas fa-tv"></i> Çizgi Film İzle</a>
+            </nav>
+            <div class="user-menu-container">
+                <button id="user-menu-button" class="user-menu-button">
+                    Maceracı Hesabı
+                </button>
+                <div id="user-menu-dropdown" class="user-menu-dropdown">
+                    <a href="/security-settings"><i class="fas fa-cog"></i> Güvenlik Ayarları</a>
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA DASHBOARD İÇERİĞİ -->
+    <main class="dashboard-main">
+        <div class="container">
+            <h1 class="welcome-title">Hoş Geldin,<span id="user-menu-username">kullanıcı</span></h1>
+            <p class="welcome-subtitle">Bugün harika bir gün. Hadi yeni şeyler öğrenelim!</p>
+
+            <div class="dashboard-grid">
+
+                <!-- KART 1: OKUMA ASİSTANI -->
+                <div class="dashboard-card card-assistant">
+                    <i class="fas fa-book-open-reader"></i>
+                    <h3>Okuma Asistanı</h3>
+                    <p>Hadi beraber hikaye okuyalım ve kelimeleri ne kadar doğru okuduğumuzu öğrenelim...</p>
+                    <a href="okuma_asistani" class="btn btn-primary">Asistanı Aç</a>
+                </div>
+
+                <!-- KART 2: EGZERSİZLER -->
+                <div class="dashboard-card card-exercises">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Eğlenceli Egzersizler</h3>
+                    <p>Sana özel olarak hazırlanmış oyunlarla pratik yap ve kendini geliştir.</p>
+                    <a href="/exercises" class="btn btn-primary">Egzersizlere Başla</a>
+                </div>
+
+                <!-- KART 3: ANALİZ VE SONUÇLAR -->
+                <div class="dashboard-card card-analysis">
+                    <i class="fas fa-chart-pie"></i>
+                    <h3>Gelişim Analizi</h3>
+                    <p>Sana özel olarak hazırlanmış raporlarla gelişimini izle, madalyaları kazan.</p>
+                        <a href="/user-rapor" class="btn btn-primary">Tüm Raporları Gör</a>
+                </div>
+
+                <!-- KART 4: YAPAY ZEKA ÖNERİLERİ -->
+                <div class="dashboard-card card-ai-recommendation">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Yapay Zeka Önerisi</h3>
+                    <p>Yapay zeka ile kendine hemen haftalık bir program çıkar. Aynı zamanda günlük egzersizler ile de gününü dolu dolu geçir... </p>
+                        <a href="/ai" class="btn btn-primary">Yapay Zeka Haftalık ve Günlük Öneri</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/menus.js"></script>
+</body>
+</html>

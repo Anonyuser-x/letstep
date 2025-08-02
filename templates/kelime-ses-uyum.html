@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelime Ses Uyumu | LetStep</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/egzersiz.css">
+    <style>
+        .question-area {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+
+        .image-options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            justify-items: center;
+        }
+
+        /* --- İlkokul için Görsel Buton Stilleri --- */
+        .option-image-button {
+            background-color: #fff;
+            border: 3px solid transparent;
+            border-radius: 15px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+        }
+
+        .option-image-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .option-image-button img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* --- Ortaokul için Metin Buton Stilleri --- */
+        .option-text-button {
+            background-color: #fff;
+            color: #333;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 20px 25px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            line-height: 1.5;
+        }
+
+        .option-text-button:hover {
+            transform: translateY(-4px);
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        /* --- Ortak Geri Bildirim Stilleri --- */
+        .option-image-button.correct, .option-text-button.correct {
+            border-color: #28a745; /* Yeşil çerçeve */
+            color: #28a745;
+            box-shadow: 0 0 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .option-image-button.incorrect, .option-text-button.incorrect {
+            border-color: #dc3545; /* Kırmızı çerçeve */
+            color: #dc3545;
+            box-shadow: 0 0 20px rgba(220, 53, 69, 0.4);
+            opacity: 0.7;
+        }
+
+        .option-image-button:disabled, .option-text-button:disabled {
+            cursor: default;
+            transform: none;
+            opacity: 1; /* Cevap sonrası soluklaşmayı engelle */
+        }
+    </style>
+</head>
+<body class="renk-siralama-body">
+
+    <header class="dashboard-header">
+        <div class="container">
+            <a href="/" class="logo">Let<span>Step</span></a>
+            <nav class="dashboard-nav">
+                <a href="/dashboard"><i class="fas fa-th-large"></i> Kontrol Paneli</a>
+                <a href="/exercises" class="active"><i class="fas fa-gamepad"></i> Egzersizler</a>
+            </nav>
+            <a href="/exercises" class="btn btn-secondary">Geri Dön</a>
+        </div>
+    </header>
+
+    <main class="exercise-main">
+        <div id="level-selection" class="level-selection">
+            <h2>Hangi seviyede egzersiz yapmak istiyorsun?</h2>
+            <div class="level-buttons">
+                <button id="btn-ilkokul" class="btn btn-primary">İlkokul</button>
+                <button id="btn-ortaokul" class="btn btn-primary">Ortaokul</button>
+            </div>
+        </div>
+
+        <div id="exercise-container" class="exercise-container" style="display: none;">
+            <div class="progress-area">
+                <div id="progress-text" class="progress-text">Soru 1 / 10</div>
+                <div class="progress-bar-container"><div id="progress-bar" class="progress-bar"></div></div>
+                <div id="score-display" class="score-display"><i class="fas fa-star"></i> Skor: 0</div>
+            </div>
+
+            <div class="question-area">
+                <div id="question-text" class="question-text"></div>
+            </div>
+
+            <div id="image-options-grid" class="image-options-grid"></div>
+
+            <div id="feedback-message" class="feedback-message"></div>
+        </div>
+
+        <div id="results-screen" class="results-screen" style="display: none;">
+            <div class="results-box">
+                <h2>Egzersiz Tamamlandı!</h2>
+                <p id="final-score-message">Harika iş çıkardın!</p>
+                <div class="results-buttons">
+                    <button id="restart-button" class="btn btn-primary">Tekrar Oyna</button>
+                    <a href="/exercises" class="btn btn-secondary">Diğer Egzersizler</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/kelime_ses_uyum.js"></script>
+</body>
+</html>

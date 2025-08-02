@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Özel Adımlar | LetStep</title>
+    <link rel="stylesheet" href="/static/css/ai.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="dashboard-header">
+            <div class="container">
+                <a href="/" class="logo">Let<span>Step</span></a>
+                <nav class="dashboard-nav">
+                    <a href="/flashcard"><i class="fas fa-layer-group"></i> Kelime Asistanı</a>
+                    <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Kontrol Paneli</a>
+                    <a href="https://www.cartoonnetwork.com.tr/izle" target="_blank"><i class="fas fa-tv"></i> Çizgi Film İzle</a>
+                </nav>
+                <div class="user-menu-container">
+                    <button id="user-menu-button" class="user-menu-button">Maceracı Hesabı <i class="fas fa-chevron-down"></i></button>
+                    <div id="user-menu-dropdown" class="user-menu-dropdown">
+                        <a href="/security-settings"><i class="fas fa-cog"></i> Güvenlik Ayarları</a>
+                        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="header-placeholder"></div>
+
+        <main>
+            <div class="recommendation-layout">
+                <!-- Sol Panel: İlerleme Takipçisi -->
+                <aside id="progressContainer">
+                    <h4>Günlük İlerlemen</h4>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <p id="progressText">İlerlemen hesaplanıyor...</p>
+                    <p id="completionMessage" style="display: none;">
+                        Harika! Bugün için tüm adımları tamamladın! 🎉
+                    </p>
+                </aside>
+
+                <!-- Sağ Panel: JS'in tanıması için gereken class -->
+                <section class="recommendations-section">
+                    <div id="recommendationArea">
+                        <!-- Öneri kartları JavaScript tarafından buraya eklenecek -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/menus.js"></script>
+    <script src="/static/js/ai.js"></script>
+</body>
+</html>

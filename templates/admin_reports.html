@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Raporları | LetStep</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Bu sayfaya özel CSS dosyası -->
+    <link rel="stylesheet" href="/static/css/reports.css">
+</head>
+<body class="admin-body">
+    <div id="toast-container"></div>
+    <div class="admin-layout">
+        <!-- Sol Menü -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header"><a href="/" class="logo">Let<span>Step</span></a></div>
+            <nav class="admin-nav">
+                <a href="/admin-dashboard"><i class="fas fa-tachometer-alt"></i> <span>Admin Paneli</span></a>
+                <a href="/admin-students"><i class="fas fa-users"></i> <span>Öğrencilerim</span></a>
+                <a href="/admin-reports" class="active"><i class="fas fa-chart-pie"></i> <span>Raporlar</span></a>
+            </nav>
+            <div class="sidebar-footer"><a href="/logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Çıkış Yap</span></a></div>
+        </aside>
+
+        <!-- Ana İçerik -->
+        <main id="reports-page" class="admin-main-content">
+            <header class="admin-header">
+                <div class="header-left">
+                    <button id="sidebar-toggle" class="sidebar-toggle-btn"><i class="fas fa-bars"></i></button>
+                    <h2>Öğrenci Gelişim Raporları</h2>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile"><span id="teacher-username">Yükleniyor...</span></div>
+                </div>
+            </header>
+
+            <div class="admin-card">
+                <div class="card-header"><h3>Gelişim Raporunu Görüntülemek İçin Bir Öğrenci Seçin</h3></div>
+                <div class="admin-table-wrapper">
+                    <table class="admin-table">
+                        <thead><tr><th>Öğrenci ID</th><th>Öğrenci Adı</th><th>Eylem</th></tr></thead>
+                        <tbody id="students-report-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Token'ı JS'e aktarmak için (Bu backend tarafından doldurulmalı) -->
+    <script>
+        window.ACCESS_TOKEN = "{{ access_token or '' }}";
+    </script>
+    <script src="/static/js/teacher_dashboard.js"></script>
+</body>
+</html>

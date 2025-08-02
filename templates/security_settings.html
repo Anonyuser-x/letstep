@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güvenlik Ayarları | LetStep</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style_teacher.css">
+</head>
+<body class="admin-body">
+
+    <!-- JavaScript'in bildirimleri göstereceği alan -->
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+             <div class="sidebar-header"><a href="/" class="logo">Let<span>Step</span></a></div>
+             <nav class="admin-nav">
+                <a href="/dashboard"><i class="fas fa-th-large fa-fw"></i> <span>Kontrol Paneli</span></a>
+                <a href="/security-settings" class="active"><i class="fas fa-user-shield fa-fw"></i> <span>Güvenlik Ayarları</span></a>
+                <a href="/logout" class="logout-link"><i class="fas fa-sign-out-alt fa-fw"></i> <span>Çıkış Yap</span></a>
+             </nav>
+        </aside>
+
+
+        <main class="admin-main-content">
+            <header class="admin-header">
+                <h2>Güvenlik Ayarları</h2>
+            </header>
+            <div id="toast-notification-area"></div>
+            <div class="admin-card security-card">
+                <h3>Kullanıcı Adını Değiştir</h3>
+                <p class="current-info-text">Mevcut Kullanıcı Adı: <strong id="current-username-display">Yükleniyor...</strong></p>
+                <form id="form-update-username" class="settings-form">
+                    <div class="form-group">
+                        <label for="new-username">Yeni Kullanıcı Adı</label>
+                        <input type="text" id="new-username" name="new_username" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Kullanıcı Adını Güncelle</button>
+                </form>
+            </div>
+
+            <div class="admin-card security-card">
+                <h3>E-posta Adresini Değiştir</h3>
+                <p class="current-info-text">Mevcut E-posta: <strong id="current-email-display">Yükleniyor...</strong></p>
+                <form id="form-update-email" class="settings-form">
+                     <div class="form-group">
+                        <label for="new-email">Yeni E-posta Adresi</label>
+                        <input type="email" id="new-email" name="new_email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">E-postayı Güncelle</button>
+                </form>
+            </div>
+
+            <div class="admin-card security-card">
+                <h3>Şifreyi Değiştir</h3>
+                <form id="form-update-password" class="settings-form">
+                    <div class="form-group">
+                        <label for="current-password">Mevcut Şifre</label>
+                        <input type="password" id="current-password" name="current_password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Yeni Şifre</label>
+                        <input type="password" id="new-password" name="new_password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Şifreyi Değiştir</button>
+                </form>
+            </div>
+
+            <div class="admin-card security-card">
+                <h3>Öğrenci Davet Kodu</h3>
+                <p>Bu kodu paylaşarak öğretmeninizin veya velinizin sizi sisteme eklemesini sağlayabilirsiniz.</p>
+                <div class="invitation-code-wrapper">
+                    <input type="text" id="invitation-code" readonly value="Yükleniyor...">
+                    <button id="copy-code-btn" class="btn btn-icon" title="Kodu Kopyala"><i class="fas fa-copy"></i></button>
+                    <button id="regenerate-code-btn" class="btn btn-icon" title="Yeni Kod Oluştur"><i class="fas fa-sync-alt"></i></button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+    <script src="/static/js/ss.js"></script>
+</body>
+</html>

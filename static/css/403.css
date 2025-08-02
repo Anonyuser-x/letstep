@@ -1,0 +1,128 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'EB Garamond', serif;
+    background-color: #0d1a26;
+    overflow: hidden;
+}
+
+.scene {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse at center, #1b2f40 0%, #0d1a26 70%);
+    perspective: 1000px;
+}
+
+.door-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.door {
+    width: 280px;
+    height: 450px;
+    background-color: #34495e;
+    border: 10px solid #2c3e50;
+    border-radius: 5px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #00f7ff;
+}
+
+.light-crack {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #ffd700;
+    box-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 20px #f1c40f;
+}
+
+.error-code {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 6rem;
+    margin: 1rem 0;
+    animation: pulse-glow 4s infinite ease-in-out;
+}
+
+.runes {
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    text-shadow: 0 0 5px #00f7ff;
+}
+
+.text-content {
+    max-width: 600px;
+    text-align: center;
+    color: #bdc3c7;
+    margin-top: 2rem;
+    padding: 0 20px;
+}
+
+h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 2.5rem;
+    color: #ecf0f1;
+    text-shadow: 0 0 10px rgba(236, 240, 241, 0.3);
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+.actions {
+    margin-top: 1.5rem;
+}
+
+.btn {
+    text-decoration: none;
+    color: #bdc3c7;
+    border: 2px solid #3498db;
+    padding: 10px 25px;
+    border-radius: 50px;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #3498db;
+    color: #0d1a26;
+    box-shadow: 0 0 15px #3498db;
+}
+
+/* Parlama Animasyonu */
+@keyframes pulse-glow {
+    0% { text-shadow: 0 0 5px #00f7ff, 0 0 10px #00f7ff; }
+    50% { text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff; }
+    100% { text-shadow: 0 0 5px #00f7ff, 0 0 10px #00f7ff; }
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 600px) {
+    .door {
+        width: 220px;
+        height: 350px;
+    }
+    .error-code {
+        font-size: 4rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    p {
+        font-size: 1rem;
+    }
+}

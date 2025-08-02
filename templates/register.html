@@ -1,0 +1,65 @@
+      
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LetStep | Kayıt Ol</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (İkonlar için) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Kendi CSS Dosyalarımız -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/auth.css">
+</head>
+<body>
+    <div class="login-page-wrapper">
+        <!-- Sol Taraf: Marka/Logo Alanı -->
+        <div class="login-branding-side">
+        </div>
+        <!-- Sağ Taraf: Form Alanı -->
+        <div class="login-form-side">
+            <a href="/" class="logo form-side-logo">Let<span>Step</span></a>
+            <div class="login-form-container">
+                <h2>Hemen Kayıt Ol</h2>
+                <!-- action ve method'u silebiliriz, çünkü JS yönetecek ama kalmasında sakınca yok -->
+                <form id="register-form" data-role="student" novalidate>
+                    <div id="form-message" class="form-message"></div>
+
+                    <label for="register-username">Kullanıcı Adı</label>
+                    <input type="text" id="register-username" name="username" placeholder="Kullanıcı adınız" required minlength="3" maxlength="20" autocomplete="username">
+
+                    <label for="register-age">Yaş</label>
+                    <input type="number" id="register-age" name="age" placeholder="Yaşınızı girin" required min="1" max="120">
+
+                    <label for="register-email">E-posta</label>
+                    <input type="email" id="register-email" name="email" placeholder="example@mail.com" required autocomplete="email">
+
+                    <label for="register-password">Şifre</label>
+                    <input type="password" id="register-password" name="password" placeholder="Şifrenizi girin" required minlength="8" autocomplete="new-password">
+
+                    <label for="register-password-confirm">Şifre Tekrar</label>
+                    <input type="password" id="register-password-confirm" name="password_confirm" placeholder="Şifrenizi tekrar girin" required minlength="8" autocomplete="new-password">
+
+                    <!-- DEĞİŞTİ: <a> etiketi yerine <button> kullanıldı -->
+                    <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+
+                    <p class="form-text">Öğretmen & Veli Olarak Hemen  <a href="/register-teacher">Kayıt Ol</a></p>
+                    <p class="form-text">Zaten Bir <a href="/login">Hesabın</a> Var Mı ? </p>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- YENİ: Kendi JS Dosyamız sayfanın sonuna eklendi -->
+    <script src="/static/js/auth.js"></script>
+</body>
+</html>
+
+    

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eğlenceli Egzersizler | LetStep</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/egzersiz.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+
+
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="container">
+            <a href="/" class="logo">Let<span>Step</span></a>
+            <nav class="dashboard-nav">
+                <a href="/flashcard"><i class="fas fa-th-large"></i> Kelime Asistanı</a>
+                <a href="/dashboard"><i class="fas fa-th-large"></i> Kontrol Paneli</a>
+                <a href="/exercises" class="active"><i class="fas fa-gamepad"></i> Egzersizler</a>
+            </nav>
+            <div class="user-menu-container">
+                <button id="user-menu-button" class="user-menu-button">
+                    <span id="user-menu-username">Kullanıcı</span>
+                </button>
+                <div id="user-menu-dropdown" class="user-menu-dropdown">
+                    <a href="/security-settings"><i class="fas fa-cog"></i> Güvenlik Ayarları</a>
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="dashboard-title">
+                <h1>Eğlenceli Egzersizler</h1>
+                <p>Odaklanmak istediğin beceriyi seç ve zihnini harekete geçir!</p>
+            </div>
+            <section class="exercise-section">
+                <h2>🧠 Kelime Egzersizleri </h2>
+                <div class="exercise-grid">
+                    <div class="exercise-card kelime-card"><h4>Akıl Yürüt</h4><p>Yaşanacak olaylar karşısında mantık yürütüp hemen karar ver.</p><a href="/akil-yurut" class="btn-start">Başla</a></div>
+                    <div class="exercise-card kelime-card"><h4>Boşluğu Doldur</h4><p>Cümlelerdeki eksik kelimeleri bul çok önemli cümleleri tamamla.</p><a href="/boslugu-doldur" class="btn-start">Başla</a></div>
+                    <div class="exercise-card yon-card"><h4>Anlam Sec</h4><p>Oluşan olaylara göre kelimeleri anlamlandırarak hayatımızı renklendiriyoruz.</p><a href="/anlam-sec" class="btn-start">Başla</a></div>
+                    <div class="exercise-card yon-card"><h4>Anlam Bağdaştır</h4><p>Anlamlar dünyasına hoşgeldiniz. anlamları birleştirerek geleceğe uzanın.</p><a href="/anlam-bagdastir" class="btn-start">Başla</a></div>
+                    <div class="exercise-card yon-card"><h4>Kelime Seste Uyum</h4><p>Kelimelerin hangi seslerle dans ettiğini öğrenmek ister misin? </p><a href="/kelime-ses-uyum" class="btn-start">Başla</a></div>
+                </div>
+            </section>
+            <section class="exercise-section">
+                <h2>🧠 Harf Egzersizleri </h2>
+                <div class="exercise-grid">
+                    <div class="exercise-card harf-card"><h4>Hecelere Ayır</h4><p>Verilen kelimenin hecelerini bulmamıza yardımcı olur musun? </p><a href="/hecelere-ayir" class="btn-start">Başla</a></div>
+                    <div class="exercise-card yon-card"><h4>Harf Karıştırma</h4><p>Harfleri karıştırmadan düzgün sıraya koyarak cümleyi tamamlayın.</p><a href="/harf-karistirma" class="btn-start">Başla</a></div>
+                    <div class="exercise-card yon-card"><h4>Gizemli Şifreleri Kır</h4><p>Karmaşık halde verilmiş harflerin bir şifre oluşturduğu düşünülüyor.</p><a href="/kod-kirici" class="btn-start">Başla</a></div>
+                    <div class="exercise-card yon-card"><h4>Harfleri Doğru Boşluklara Koy</h4><p>Kelimelerdeki harfleri yardım için seni çağırıyor koş!!</p><a href="/harf-karistirma-bosluk" class="btn-start">Başla</a></div>
+                    <div class="exercise-card yon-card"><h4>İlk harfi yakalama</h4><p>Görsellerin ilk harflerini unuttum bana yardım eder misin?</p><a href="/ilk-harfi-yakala" class="btn-start">Başla</a></div>
+
+
+                </div>
+            </section>
+            <section class="exercise-section">
+                <h2>🧠 Yön bulma ve Yer bulma Egzersizleri </h2>
+                <div class="exercise-grid">
+                    <div class="exercise-card yon-card"><h4>Nesnelerin Nerede olduğunu bul</h4><p>Kaybolan nesnelerin gittiği yolu biliyoruz fakat nerede olduklarını bilmiyoruz hemen bize göster.</p><a href="/nesne-yonu-tanima" class="btn-start">Başla</a></div>
+                    <div class="exercise-card yon-card"><h4>Yön Takibi</h4><p>Karmaşık yollardan düzensiz yerlerden doğru yolu bize gösterir misin ?</p><a href="/yon-takibi" class="btn-start">Başla</a></div>
+
+                </div>
+            </section>
+
+      <!--      <section class="exercise-section">
+                <h2> İkili Kombinasyonlar</h2>
+                <div class="exercise-grid dual-grid">
+                    <div class="exercise-card dual-card kelime-renk-card"><h4>Renkli Kelime Avı</h4><p>"Sarı renkle yazılan hayvanları seç" gibi görevleri tamamla.</p><a href="/renkli-kelime-avi" class="btn-start">Başla</a></div>
+                    <div class="exercise-card dual-card kelime-sayi-card"><h4>Şifreli Kelime Kur</h4><p>Sayılarla verilmiş şifreyi çözerek kelimeyi oluştur.</p><a href="/sifreli-kelime-kur" class="btn-start">Başla</a></div>
+                     Diğer ikili egzersiz kartları buraya...
+                </div>
+            </section>
+            -->
+        </div>
+    </main>
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/menus.js"></script>
+
+</body>
+</html>

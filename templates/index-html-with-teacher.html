@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli | LetStep</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Bu sayfaya özel CSS dosyası -->
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body class="admin-body">
+    <div id="toast-container"></div>
+    <div class="admin-layout">
+        <!-- Sol Menü -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header"><a href="/" class="logo">Let<span>Step</span></a></div>
+            <nav class="admin-nav">
+                <a href="/admin-dashboard" class="active"><i class="fas fa-tachometer-alt"></i> <span>Admin Paneli</span></a>
+                <a href="/admin-students"><i class="fas fa-users"></i> <span>Öğrencilerim</span></a>
+                <a href="/admin-reports"><i class="fas fa-chart-pie"></i> <span>Raporlar</span></a>
+            </nav>
+            <div class="sidebar-footer"><a href="/logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Çıkış Yap</span></a></div>
+        </aside>
+
+        <!-- Ana İçerik -->
+        <main id="dashboard-page" class="admin-main-content">
+            <header class="admin-header">
+                <div class="header-left">
+                    <button id="sidebar-toggle" class="sidebar-toggle-btn"><i class="fas fa-bars"></i></button>
+                    <h2>Admin Paneli</h2>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile"><span id="teacher-username">Yükleniyor...</span></div>
+                </div>
+            </header>
+
+            <!-- İstatistik Kartları -->
+            <div class="admin-widgets-grid">
+                <div class="stat-card">
+                    <div class="stat-icon icon-students"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-title">Toplam Öğrenci</span>
+                        <span id="stat-total-students" class="stat-value">-</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-activity"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-title">Bugünkü Aktivite</span>
+                        <span id="stat-today-activity" class="stat-value">-</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-tasks"><i class="fas fa-tasks"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-title">Atanan Ödevler</span>
+                        <span id="stat-assigned-tasks" class="stat-value">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Son Aktiviteler Tablosu -->
+            <div class="admin-card">
+                <div class="card-header"><h3>Öğrenci Egzersiz Özetleri</h3></div>
+                <div class="admin-table-wrapper">
+                    <table class="admin-table">
+                        <thead><tr><th>Öğrenci</th><th>Egzersiz Tipi</th><th>Çözülme Sayısı</th></tr></thead>
+                        <tbody id="recent-activities-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/teacher_dashboard.js"></script>
+</body>
+</html>

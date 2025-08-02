@@ -1,0 +1,208 @@
+/* Genel Sayfa Ayarları */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    /* Eski body arka planını kaldırıyoruz, çünkü bölümlerin kendi arka planları olacak */
+}
+
+/* Ana Sarmalayıcı: Sayfayı ikiye böler */
+.login-page-wrapper {
+    display: flex; /* Çocukları yan yana dizer */
+    width: 100%;
+    min-height: 100vh; /* Ekran yüksekliği kadar yer kaplar */
+}
+
+/* Sol ve Sağ Bölümler için Ortak Stiller */
+.login-branding-side,
+.login-form-side {
+    width: 50%; /* Genişlikleri %50 yapar */
+    display: flex;
+    justify-content: center; /* İçeriği yatayda ortalar */
+    align-items: center;   /* İçeriği dikeyde ortalar */
+    padding: 2rem;
+    box-sizing: border-box; /* Padding'in genişliği etkilememesi için */
+}
+
+/* Sol Taraf: Marka/Logo Alanı */
+/* YENİ VE GÜNCELLENMİŞ KOD */
+.login-branding-side {
+    position: relative;
+    color: white;
+    text-align: center;
+    display: flex; /* İçeriği (logo ve p) ortalamak için */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image:
+        url('../image/login_anasayfa.png'),
+        linear-gradient(to bottom, #f1f5f9, #f1f5f9);
+    background-position: center, center;
+    background-size: 80% auto, cover;
+    background-repeat: no-repeat, no-repeat;
+    background-color: #f1f5f9;
+}
+
+
+.login-branding-side .logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 4rem; /* Logoyu büyüttük */
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    display: block; /* Altındaki p elementiyle düzgün hizalanması için */
+    margin-bottom: 1rem;
+}
+
+.login-branding-side .logo span {
+    color: #60a5fa; /* Mavi tonu */
+}
+
+.login-branding-side p {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 1.25rem;
+    color: #dbeafe; /* Daha açık bir mavi tonu */
+}
+
+
+/* Sağ Taraf: Form Alanı */
+.login-form-side {
+    background-color: #f1f5f9; /* Açık gri bir arka plan */
+    flex-direction: column; /* DEĞİŞİKLİK: İçeriği alt alta (dikey) dizer */
+}
+
+/* Eski .auth-section .container artık bu */
+.login-form-container {
+    background-color: white;
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    max-width: 400px;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Form Başlığı */
+.login-form-container h2 {
+    text-align: center;
+    color: #1e3a8a;
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+}
+
+/* Form Elemanları */
+.login-form-container form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #1e40af;
+}
+
+.login-form-container form input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    background-color: #f1f5f9;
+    transition: border 0.3s, box-shadow 0.3s;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.login-form-container form input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Butonlar */
+.login-form-container .btn {
+    display: block; /* Butonların tüm genişliği kaplaması için */
+    width: 100%;
+    padding: 0.85rem 1rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.login-form-container .btn-secondary {
+    background-color: #1e3a8a;
+    color: white;
+}
+.login-form-container .btn-secondary:hover {
+    background-color: #1e40af;
+}
+
+.login-form-container .btn-primary {
+    background-color: transparent;
+    color: #1e3a8a;
+    border: 2px solid #1e3a8a;
+}
+.login-form-container .btn-primary:hover {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+/* Formdaki son elemanın alt boşluğunu kaldırmak için */
+.login-form-container .btn:last-child {
+    margin-bottom: 0;
+}
+.form-side-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem; /* Form alanına sığacak, uygun bir boyut */
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 2rem; /* Logo ile form arasında boşluk bırakır */
+    color: #1e3a8a; /* Markanın ana rengi */
+}
+
+.form-side-logo span {
+    color: #3b82f6; /* Markanın vurgu rengi */
+}
+
+.error-message {
+    color: #dc2626; /* Kırmızı renk */
+    background-color: #fee2e2; /* Açık kırmızı arka plan */
+    border: 1px solid #ef4444;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    display: none; /* Varsayılan olarak gizli */
+}
+
+
+.form-message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    display: none; /* Varsayılan olarak gizli */
+}
+
+/* Mesaj içeriği olduğunda görünür yap */
+.form-message:not(:empty) {
+    display: block;
+}
+
+.form-message.success {
+    background-color: #d4edda; /* Yeşilimsi arka plan */
+    color: #155724; /* Koyu yeşil yazı */
+    border: 1px solid #c3e6cb;
+}
+
+.form-message.error {
+    background-color: #f8d7da; /* Kırmızımsı arka plan */
+    color: #721c24; /* Koyu kırmızı yazı */
+    border: 1px solid #f5c6cb;
+}

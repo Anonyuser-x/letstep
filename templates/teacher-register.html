@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- DEĞİŞTİ: Sayfa Başlığı -->
+    <title>LetStep | Öğretmen Olarak Kayıt Ol</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Kendi CSS Dosyalarımız -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/auth.css">
+</head>
+<body>
+    <div class="login-page-wrapper">
+        <!-- Sol Taraf: Marka/Logo Alanı -->
+        <div class="login-branding-side">
+        </div>
+        <!-- Sağ Taraf: Form Alanı -->
+        <div class="login-form-side">
+            <a href="/" class="logo form-side-logo">Let<span>Step</span></a>
+            <div class="login-form-container">
+                <!-- DEĞİŞTİ: Ana Başlık -->
+                <h2>Öğretmen Olarak Kayıt Ol</h2>
+
+                <form id="register-form" data-role="teacher" novalidate>
+                    <div id="form-message" class="form-message"></div>
+
+                    <label for="register-username">Kullanıcı Adı</label>
+                    <input type="text" id="register-username" name="username" placeholder="Kullanıcı adınız" required minlength="3" maxlength="20" autocomplete="username">
+
+                    <label for="register-email">E-posta</label>
+                    <input type="email" id="register-email" name="email" placeholder="example@mail.com" required autocomplete="email">
+
+
+                    <label for="register-password">Şifre</label>
+                    <input type="password" id="register-password" name="password" placeholder="Şifrenizi girin" required minlength="8" autocomplete="new-password">
+
+                    <label for="register-password-confirm">Şifre Tekrar</label>
+                    <input type="password" id="register-password-confirm" name="password_confirm" placeholder="Şifrenizi tekrar girin" required minlength="8" autocomplete="new-password">
+
+                    <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+
+                    <!-- DEĞİŞTİ: Linkler güncellendi -->
+                    <p class="form-text">Öğrenci olarak mı kayıt olmak istiyorsun? <a href="/register">Öğrenci Kaydı</a></p>
+                    <p class="form-text">Zaten bir hesabın var mı? <a href="/login">Giriş Yap</a></p>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- DEĞİŞTİ: Yeni Javascript dosyasını çağırıyoruz -->
+    <script src="/static/js/auth.js"></script>
+</body>
+</html>

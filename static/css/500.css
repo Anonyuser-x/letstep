@@ -1,0 +1,140 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'EB Garamond', serif;
+    background-color: #1a140f; /* Koyu isli kahverengi */
+    color: #e0d1b1; /* Eskitilmiş pirinç/kağıt rengi */
+    overflow: hidden;
+}
+
+.scene {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(ellipse at center, #3b2f27 0%, #1a140f 75%);
+}
+
+.machine-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin-bottom: 2rem;
+}
+
+.gear {
+    position: absolute;
+    border: 15px solid #8b4513; /* Bakır rengi dişli */
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: 0 0 25px rgba(0,0,0,0.7);
+}
+.gear-large {
+    width: 150px;
+    height: 150px;
+    top: 20px;
+    left: 0;
+    animation: stutter-rotate 10s infinite steps(6, end);
+}
+.gear-small {
+    width: 80px;
+    height: 80px;
+    border-width: 10px;
+    top: 60px;
+    right: 20px;
+    animation: stutter-rotate-reverse 13s infinite linear;
+}
+
+/* Kırık Dişli Efekti */
+.gear-large::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 20px;
+    background: #1a140f;
+    top: -5px;
+    left: 35px;
+}
+
+.crystal {
+    position: absolute;
+    width: 40px;
+    height: 180px;
+    background: #00f7ff;
+    left: 130px;
+    bottom: -20px;
+    border: 3px solid #c9ffff;
+    border-radius: 4px;
+    box-shadow: 0 0 20px #00f7ff;
+    animation: flicker 2.5s infinite linear;
+}
+
+.text-content {
+    max-width: 700px;
+    padding: 0 20px;
+}
+.error-code {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9rem;
+    color: #d2691e;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 4px 4px 0px #1a140f, 0 0 20px rgba(210, 105, 30, 0.5);
+}
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: #ffaf42;
+    margin: 1rem 0;
+}
+p { font-size: 1.2rem; line-height: 1.6; }
+
+.actions { margin-top: 1.5rem; }
+.btn {
+    text-decoration: none;
+    background: #d2691e;
+    color: #fff;
+    border: 2px solid #ffaf42;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    background: #ffaf42;
+    color: #1a140f;
+    box-shadow: 0 0 20px #ffaf42;
+}
+
+/* Kıvılcım Animasyonları */
+.spark {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: #ffae42;
+    border-radius: 50%;
+    animation: spark-fly 1.2s infinite ease-out;
+}
+.s1 { top: 80px; left: 120px; }
+.s2 { top: 100px; left: 140px; animation-delay: 0.3s; animation-duration: 1.5s; }
+.s3 { top: 120px; left: 160px; animation-delay: 0.8s; animation-duration: 1.3s; }
+
+@keyframes spark-fly {
+    0% { transform: translate(0, 0); opacity: 1; }
+    100% { transform: translate(40px, -80px); opacity: 0; }
+}
+@keyframes stutter-rotate {
+    from { transform: rotate(0deg); } to { transform: rotate(45deg); }
+}
+@keyframes stutter-rotate-reverse {
+    from { transform: rotate(0deg); } to { transform: rotate(-90deg); }
+}
+@keyframes flicker {
+    0%, 100% { opacity: 0.9; transform: scale(1.0); }
+    50% { opacity: 0.6; transform: scale(1.05); box-shadow: 0 0 30px #00f7ff; }
+}

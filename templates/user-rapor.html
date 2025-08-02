@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelişim Raporun | LetStep</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/user_data_report.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>Gelişim Raporun</h1>
+            <p>Başarıya giden yolda attığın her adım çok değerli!</p>
+        </header>
+
+        <div class="tabs">
+            <a href="/dashboard" class="tab-btn dashboard-btn"><i class="fas fa-arrow-left"></i> Dashboard'a Dön</a>
+            <a href="/exercises" class="tab-btn dashboard-btn"><i class="fas fa-arrow-left"></i> Egzersizler'e Dön</a>
+            <button class="tab-btn active" data-tab="overview"><i class="fas fa-chart-line"></i> Genel Bakış</button>
+            <button class="tab-btn" data-tab="journey"><i class="fas fa-stairs"></i> Gelişim Merdiveni</button>
+        </div>
+
+        <main>
+            <div id="content-overview" class="tab-content active">
+                <div class="stat-showcase" id="stat-showcase-container"></div>
+                <div class="overview-grid">
+                    <div class="overview-grid__main">
+                        <div class="card chart-card">
+                            <h2>Son 7 Günlük Egzersiz Dağılımın</h2>
+                            <div class="chart-container-overview"><canvas id="progressChart"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="overview-grid__sidebar">
+                        <div class="card activity-card">
+                            <h3>🚀 Son Tekrarların</h3>
+                            <ul class="activity-list"></ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Gelişim Odağı Bölümü -->
+                <div id="overview-focus-section" style="display: none;"></div>
+
+                <!-- HAFTALIK VERİMLİLİK BÖLÜMÜ DOĞRU YERE TAŞINDI -->
+                <div id="overview-weekly-section" class="card" style="margin-top: 2rem; display:none;">
+                    <h2>Haftalık Verimliliğin</h2>
+                    <p>Haftanın hangi günleri daha çok pratik yaptığını görerek çalışma düzenini daha iyi planlayabilirsin.</p>
+                    <div class="weekly-chart-container">
+                        <canvas id="weeklyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-journey" class="tab-content">
+                <div id="loader" class="loader"><i class="fas fa-shoe-prints fa-spin"></i><p>Yolculuğun hazırlanıyor...</p></div>
+                <div id="journey-container" style="display: none;">
+                    <div class="journey-layout">
+                        <div class="staircase-wrapper card">
+                            <h3 class="card-title">Başarı Basamakların</h3>
+                            <div class="staircase-container" id="staircase-container"></div>
+                        </div>
+                        <div class="journey-details">
+                            <div class="card" id="day-details">
+                                <h3 class="card-title">📊 Adım Detayları</h3>
+                                <div id="details-content" class="details-content"><p class="placeholder-text">👆 Bir basamağa tıkla!</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Madalya Köşesi -->
+                    <div id="trophy-section"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/user_data_report.js"></script>
+</body>
+</html>

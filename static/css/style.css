@@ -1,0 +1,879 @@
+/* GENEL AYARLAR VE DEĞİŞKENLER */
+:root {
+    --primary-color: #5b92e5; /* Sakin Mavi */
+    --secondary-color: #5be5a2; /* Canlı Yeşil */
+    --text-color: #333745; /* Koyu Gri (Siyah yerine) */
+    --bg-color: #fdfcfa; /* Krem Arkaplan */
+    --light-bg-color: #ffffff;
+    --heading-font: 'Poppins', sans-serif;
+    --body-font: 'Atkinson Hyperlegible', sans-serif;
+    --menu-primary-blue: #007aff; /* Canlı ve modern bir mavi */
+    --menu-hover-blue: #f0f7ff;  /* Vurgu için çok açık mavi */
+    --menu-background: #ffffff;   /* Saf beyaz arka plan */
+    --menu-text-color: #333;       /* Yumuşak siyah metin */
+    --menu-icon-color: #8a99a8;    /* Nötr ikon rengi */
+    --menu-shadow: 0px 5px 15px rgba(0, 122, 255, 0.1), 0px 4px 6px rgba(0, 122, 255, 0.08);
+    --menu-border-radius: 8px;    /* Yumuşak köşeler */
+    --menu-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Akıcı animasyon */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--body-font);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* BUTONLAR */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: var(--heading-font);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #4a7ac7;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    background-color: transparent;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-large {
+    padding: 15px 35px;
+    font-size: 1.1rem;
+}
+
+
+/* HEADER */
+header {
+    background: var(--bg-color);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--heading-font);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.cta-buttons .btn-secondary {
+    margin-right: 10px;
+}
+
+.hamburger-menu {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* HERO BÖLÜMÜ */
+.hero {
+    min-height: calc(100vh - 85px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative; 
+    color: #fff; 
+    padding: 0 20px;
+    background-image: 
+        linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 10)),
+        url('../image/anasayfa.jpg');
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    opacity: 0.95; 
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* ÖZELLİKLER BÖLÜMÜ */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: var(--light-bg-color);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(91, 146, 229, 0.2);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* NASIL ÇALIŞIR BÖLÜMÜ */
+.bg-light {
+    background: var(--light-bg-color);
+}
+
+.steps-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    position: relative;
+    margin-top: 50px;
+}
+
+.steps-container::before {
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: #e0e0e0;
+    z-index: 1;
+}
+
+.step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.step-number {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: var(--heading-font);
+    margin: 0 auto 20px;
+    border: 5px solid var(--bg-color);
+}
+
+.step h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+/* MOTİVASYON SÖZÜ */
+.testimonial {
+    background: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 60px 0;
+}
+
+.testimonial blockquote {
+    font-size: 1.8rem;
+    font-style: italic;
+    font-family: var(--heading-font);
+    font-weight: 500;
+    max-width: 700px;
+    margin: 0 auto;
+    border: none;
+}
+
+/* SON ÇAĞRI (FINAL CTA) */
+.final-cta {
+    text-align: center;
+}
+.final-cta .section-title {
+    font-size: 2rem;
+}
+.final-cta p {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+/* FOOTER */
+footer {
+    background: var(--text-color);
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+footer .logo {
+    color: #fff;
+}
+
+footer .logo span {
+    color: var(--secondary-color);
+}
+
+footer p {
+    margin: 15px 0;
+    opacity: 0.7;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* KAYDIRMA ANİMASYONU */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* MOBİL UYUMLULUK (RESPONSIVE) */
+@media (max-width: 992px) {
+    .section-title { font-size: 2rem; }
+    .hero h1 { font-size: 2.8rem; }
+    
+    .steps-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .steps-container::before { display: none; }
+    .step { max-width: 400px; }
+}
+
+
+@media (max-width: 768px) {
+    header .container {
+        position: relative;
+    }
+    
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--light-bg-color);
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .cta-buttons {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
+
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+}
+
+
+/* ================================================== */
+/* ===== DASHBOARD SAYFASI STİLLERİ ===== */
+/* ================================================== */
+
+.dashboard-body {
+    background-color: #f4f7fa;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    background-color: #fff;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.dashboard-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-nav {
+    display: flex;
+    gap: 30px;
+}
+
+.dashboard-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-family: var(--heading-font);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.dashboard-nav a:hover {
+    color: var(--primary-color);
+}
+
+
+/* Dashboard Ana İçerik */
+.dashboard-main {
+    padding: 60px 0;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.welcome-subtitle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 40px;
+}
+
+
+/* Dashboard Grid ve Kartlar */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.dashboard-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.dashboard-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #eaf2ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.dashboard-card p {
+    color: #6c757d;
+    line-height: 1.6;
+    flex-grow: 1; 
+    margin-bottom: 20px;
+}
+
+/* Analiz Kartı Özel Stilleri */
+.card-analysis .stats {
+    margin: 15px 0;
+}
+.card-analysis .stat-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.card-analysis .stat-item:last-child {
+    border-bottom: none;
+}
+.card-analysis .stat-item strong {
+    font-family: var(--heading-font);
+    font-size: 1.1rem;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-family: var(--heading-font);
+    align-self: flex-start;
+}
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+
+/* AI Öneri Kartı Özel Stilleri */
+.card-ai-recommendation {
+    background-color: #eaf2ff;
+    border: 1px solid var(--primary-color);
+}
+
+.card-ai-recommendation i {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+
+/* ================================================== */
+/* === OKUMA ASİSTANI SAYFASI STİLLERİ === */
+/* ================================================== */
+
+.assistant-body {
+    background-color: #f4f7fa;
+}
+
+.assistant-main {
+    padding: 60px 0;
+}
+
+.assistant-container {
+    max-width: 800px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.assistant-header {
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.assistant-header h2 {
+    font-size: 2rem;
+    color: var(--text-color);
+}
+
+.assistant-header p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+.paragraph-box {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 25px;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    line-height: 2.2; 
+    letter-spacing: 0.5px;
+    color: #343a40;
+}
+
+.controls {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.controls .btn i {
+    margin-right: 8px;
+}
+
+.status-text {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+#start-btn.recording {
+    background-color: #e63946;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(230, 57, 70, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0); }
+}
+
+
+.results-container h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.result-box .correct-word {
+    color: #2a9d8f;
+    font-weight: bold;
+}
+
+.result-box .incorrect-word {
+    color: #e63946;
+    font-weight: bold;
+    text-decoration: underline;
+    background-color: #ffe8e8;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.results-container {
+    margin-top: 2rem;
+    width: 100%;
+}
+.result-box {
+    text-align: left;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 100px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.result-summary {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.accuracy-score {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #28a745;
+}
+.result-details .detail-section {
+    margin-bottom: 1rem;
+}
+.result-details ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0.5rem;
+}
+.result-details li {
+    background-color: #fff;
+    border-left: 4px solid #ffc107;
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+.omitted-word {
+    color: #dc3545;
+    font-weight: bold;
+    background-color: #f8d7da;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+.extra-word {
+    color: #007bff;
+    font-weight: bold;
+    background-color: #cce5ff;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+/* Kullanıcı Menüsü */
+.user-menu-container {
+    position: relative;
+    display: inline-block; /* Veya flex, ihtiyacınıza göre */
+}
+
+/* Dropdown menüsünü başlangıçta gizle */
+.user-menu-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Dropdown menüsündeki linklerin stili */
+.user-menu-dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Linklerin üzerine gelince arka plan rengini değiştir */
+.user-menu-dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+/* JavaScript tarafından eklenecek olan 'show' class'ı, menüyü görünür yapar */
+.user-menu-dropdown.show {
+    display: block;
+}
+
+/* Küçük fade-in animasyonu */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+.user-menu-container {
+    position: relative;
+    display: inline-flex; /* İçerikleri hizalamak için flex kullanıyoruz */
+}
+
+/* Kullanıcı adı ve butonu */
+.user-menu-button {
+    background-color: #5b92e5; /* Açık gri, sade ama belirgin */
+    border: 1px solid #ccc; /* İnce, hafif göze çarpan çerçeve */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+    /* Yazı tipi ve kalınlık opsiyonel */
+    font-weight: 500;
+    font-size: 14px;
+
+}
+.user-menu-button:hover {
+    background-color: #e0e0e0; /* Hover’da hafif koyulaşma */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Hover’da gölge efekti */
+}
+.user-menu-button:active {
+    background-color: #d5d5d5; /* Tıklanma anı efekti */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* İçeriye doğru gölge */
+}
+
+/* === AÇILIR MENÜNÜN KENDİSİ === */
+.user-menu-dropdown {
+    /* Başlangıçta gizli ve animasyona hazır */
+    display: block; /* Animasyon için block olmalı, none değil */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px); /* Yukarıdan gelme efekti için */
+
+    position: absolute;
+    top: calc(100% + 10px); /* Butonun 10px altında başla */
+    right: 0;
+    width: 240px; /* Daha ferah bir genişlik */
+
+    background-color: var(--menu-background);
+    border-radius: var(--menu-border-radius);
+    box-shadow: var(--menu-shadow);
+    padding: 8px; /* İçerik ve kenarlar arası boşluk */
+    z-index: 1001; /* Diğer elementlerin üzerinde kalması için */
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
+    overflow: hidden; /* Köşeleri yuvarlak tutmak için */
+}
+
+/* Neden display:none yerine visibility/opacity kullandık?
+   'display' özelliği animasyonla değiştirilemez. 'opacity' ve 'transform' ise
+   'transition' ile yumuşak geçişler yapmamızı sağlar. 'visibility' ise
+   menü gizliyken tıklama gibi olayları tamamen engeller. */
+
+/* JavaScript '.show' class'ını eklediğinde menüyü görünür ve animasyonlu yap */
+.user-menu-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Menü içindeki linkler */
+.user-menu-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* İkon ve metin arası boşluk */
+
+    padding: 12px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    color: var(--menu-text-color);
+    border-radius: 6px; /* Linklerin de köşeleri yumuşak olsun */
+    transition: var(--menu-transition);
+}
+
+/* Menü linklerindeki ikonlar */
+.user-menu-dropdown a i {
+    color: var(--menu-icon-color);
+    font-size: 16px;
+    width: 20px; /* Tüm ikonların aynı genişlikte olmasını sağlayarak metinleri hizalar */
+    text-align: center;
+    transition: var(--menu-transition);
+}
+
+/* Linklerin üzerine gelince olacaklar */
+.user-menu-dropdown a:hover {
+    background-color: var(--menu-hover-blue);
+    color: var(--menu-primary-blue); /* Metin rengini ana mavi yap */
+}
+
+.user-menu-dropdown a:hover i {
+    color: var(--menu-primary-blue); /* İkon rengini de ana mavi yap */
+}
+
+/* İki link arasına ince bir ayırıcı çizgi ekleyelim */
+.user-menu-dropdown a:not(:last-child) {
+    margin-bottom: 4px; /* Linkler arası dikey boşluk */
+}
+
+
+
+
+/* FLASHCARD CSSS */

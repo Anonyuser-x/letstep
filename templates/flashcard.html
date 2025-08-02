@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Disleksi Flashcard Uygulaması</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .card-container { transition: transform 0.7s; }
+        .card-container.flipped { transform: rotateY(180deg); }
+        .card-front, .card-back { transition: background-color 0.3s, border-color 0.3s; }
+        .card-back { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-blue-50">
+
+    <header class="dashboard-header">
+        <div class="container">
+            <a href="/" class="logo">Let<span>Step</span></a>
+            <nav class="dashboard-nav">
+                <a href="/flashcard"><i class="active fas fa-th-large"></i> Kelime Asistanı</a>
+                <a href="/dashboard"><i class="fas fa-th-large"></i> Kontrol Paneli</a>
+                <!-- Cartoon Network linki, yeni sekmede açılacak -->
+                <a href="https://www.cartoonnetwork.com.tr/izle" target="_blank"><i class="fas fa-tv"></i> Çizgi Film İzle</a>
+            </nav>
+            <div class="user-menu-container">
+                <button id="user-menu-button" class="user-menu-button">
+                    <span id="user-menu-username">Kullanıcı</span>
+                </button>
+                <div id="user-menu-dropdown" class="user-menu-dropdown">
+                    <a href="/security-settings"><i class="fas fa-cog"></i> Güvenlik Ayarları</a>
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ana Uygulama Konteyneri -->
+    <div id="app-container">
+        <div class="min-h-screen p-4">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-8">
+                    <div class="flex items-center space-x-4">
+                        <i data-lucide="brain" class="w-8 h-8 text-purple-600"></i>
+                        <h1 class="text-2xl font-bold text-gray-800">Disleksi Flashcard</h1>
+                    </div>
+                    <button id="show-stats-btn" class="bg-white shadow-lg px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors duration-300">
+                        İstatistikler
+                    </button>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between text-sm text-gray-600 mb-2">
+                        <span id="progress-text">Kart 1 / 9</span>
+                        <span id="accuracy-text">Başarı: 0%</span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-3">
+                        <div id="progress-bar" class="bg-gradient-to-r from-purple-500 to-blue-500 h-3 rounded-full transition-all duration-300" style="width: 11%;"></div>
+                    </div>
+                </div>
+
+                <!-- Flashcard -->
+                <div class="relative perspective-1000">
+                    <div id="card-container" class="card-container w-full h-96 rounded-3xl shadow-2xl cursor-pointer transform-style-preserve-3d">
+                        <!-- Front Side -->
+                        <div id="card-front" class="card-front absolute inset-0 w-full h-full rounded-3xl border-2 backface-hidden">
+                            <div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+                                <div class="flex flex-col space-y-2">
+                                    <div id="front-difficulty-badge" class="px-4 py-2 rounded-full text-white text-sm font-bold shadow-lg"></div>
+                                    <div id="error-type-badge" class="bg-white/80 backdrop-blur px-3 py-1 rounded-full text-xs font-medium text-gray-700"></div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xs text-gray-500 mb-1">Benzerlik</div>
+                                    <div id="similarity-score" class="text-sm font-bold text-gray-700"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-center h-full p-8">
+                                <div class="text-center">
+                                    <div class="text-red-600 text-sm font-bold mb-3 bg-red-100 px-4 py-2 rounded-full inline-block">
+                                        📢 Yanlış Telaffuz
+                                    </div>
+                                    <div id="user-pronunciation" class="text-5xl font-bold text-gray-800 mb-6 drop-shadow-lg"></div>
+                                    <div class="text-gray-600 text-lg bg-white/60 backdrop-blur px-4 py-2 rounded-xl">
+                                        Doğru telaffuzu görmek için kartı çevirin
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Side -->
+                        <div id="card-back" class="card-back absolute inset-0 w-full h-full rounded-3xl border-2 backface-hidden">
+                            <div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+                                <div id="back-difficulty-badge" class="px-4 py-2 rounded-full text-white text-sm font-bold shadow-lg"></div>
+                                <div id="word-type-badge" class="bg-white/80 backdrop-blur px-3 py-1 rounded-full text-xs font-medium text-gray-700"></div>
+                            </div>
+                            <div class="flex items-center justify-center h-full p-8">
+                                <div class="text-center">
+                                    <div class="text-green-600 text-sm font-bold mb-3 bg-green-100 px-4 py-2 rounded-full inline-block">
+                                        ✅ Doğru Telaffuz
+                                    </div>
+                                    <div id="correct-word" class="text-5xl font-bold text-gray-800 mb-4 drop-shadow-lg"></div>
+                                    <div id="word-description" class="text-gray-600 text-lg mb-6 bg-white/60 backdrop-blur px-4 py-2 rounded-xl"></div>
+                                    <button id="play-audio-btn" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-2xl flex items-center space-x-3 mx-auto transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                                        <i data-lucide="volume-2" class="w-5 h-5"></i>
+                                        <span class="font-medium">Dinle</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-between items-center mt-8">
+                    <button id="prev-btn" class="flex items-center space-x-2 bg-white shadow-lg px-6 py-3 rounded-2xl text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        <span>Önceki</span>
+                    </button>
+                    <div id="mark-buttons-container" class="flex space-x-4 hidden">
+                        <button id="mark-incorrect-btn" class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center space-x-2">
+                            <span>😰</span>
+                            <span>Hala Zor</span>
+                        </button>
+                        <button id="mark-correct-btn" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center space-x-2">
+                            <span>🎉</span>
+                            <span>Artık Kolay</span>
+                        </button>
+                    </div>
+                    <button id="next-btn" class="flex items-center space-x-2 bg-white shadow-lg px-6 py-3 rounded-2xl text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300">
+                        <span>Sonraki</span>
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- Word Type Legend -->
+                <div class="mt-8 bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800">Kelime Türleri</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-blue-500 rounded-full"></div><span>Fiil</span></div>
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-green-500 rounded-full"></div><span>İsim</span></div>
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-purple-500 rounded-full"></div><span>Sıfat</span></div>
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-orange-500 rounded-full"></div><span>Zaman İfadesi</span></div>
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-pink-500 rounded-full"></div><span>Ses İfadesi</span></div>
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-teal-500 rounded-full"></div><span>Ek Almış</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- İstatistik Ekranı Konteyneri (Başlangıçta gizli) -->
+    <div id="stats-container" class="hidden">
+         <div class="min-h-screen p-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl p-8">
+                    <div class="text-center mb-8">
+                        <i data-lucide="trophy" class="w-16 h-16 text-yellow-500 mx-auto mb-4"></i>
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">İstatistikler</h1>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-2xl">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-blue-100 text-sm">Genel Başarı</p>
+                                    <p id="stats-accuracy" class="text-3xl font-bold">0%</p>
+                                </div>
+                                <i data-lucide="target" class="w-12 h-12 text-blue-200"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-green-500 to-teal-600 text-white p-6 rounded-2xl">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-green-100 text-sm">İncelenen Kart</p>
+                                    <p id="stats-reviewed" class="text-3xl font-bold">0/9</p>
+                                </div>
+                                <i data-lucide="book-open" class="w-12 h-12 text-green-200"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Zorluk Dağılımı</h3>
+                        <div id="difficulty-distribution" class="space-y-4">
+                            <!-- JS ile doldurulacak -->
+                        </div>
+                        <div class="mt-6 p-4 bg-blue-50 rounded-xl">
+                            <h4 class="font-semibold text-blue-900 mb-2">Zorluk Kriterleri:</h4>
+                            <div class="text-sm text-blue-800 space-y-1">
+                                <div><strong>Kolay:</strong> Kelimeler %70+ benzer (ek eksikliği gibi)</div>
+                                <div><strong>Orta:</strong> Kelimeler %30-70 arası benzer</div>
+                                <div><strong>Zor:</strong> Uzun kelimeler, büyük farklar</div>
+                                <div><strong>Çok Zor:</strong> Tamamen farklı kelimeler (%30< benzerlik)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center space-x-4">
+                        <button id="continue-studying-btn" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-2xl font-medium transition-colors duration-300">
+                            Çalışmaya Devam Et
+                        </button>
+                        <button id="reset-progress-btn" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-2xl font-medium transition-colors duration-300 flex items-center space-x-2">
+                            <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+                            <span>Sıfırla</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/static/js/flashcard.js"></script>
+    <script src="/static/js/menus.js"></script>
+
+</body>
+</html>

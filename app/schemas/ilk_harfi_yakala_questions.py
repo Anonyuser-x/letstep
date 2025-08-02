@@ -1,0 +1,17 @@
+from pydantic import BaseModel
+
+class IlkHarfiYakalaBase(BaseModel):
+    question_text: str
+    option_a: str
+    option_b: str
+    option_c: str
+    correct_answer: str
+    level: str
+    exercise_id: int
+    question_image:str
+
+class IlkHarfiYakalaRead(IlkHarfiYakalaBase):
+    id: int
+
+    class Config:
+        from_attributes = True

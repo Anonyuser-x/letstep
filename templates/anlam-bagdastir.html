@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anlam Bağdaştır | LetStep</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/egzersiz.css">
+    <style>
+        .question-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        #question-image-container {
+            width: 320px;
+            height: 320px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-color: #f0f2f5;
+            display: none;
+        }
+
+        #question-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .question-word {
+            text-align: center;
+            font-size: 1.4rem!!;
+        }
+
+        /* ✨ YENİ: Ortaokul input alanı için stiller */
+        .input-answer-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* input ile buton arasına boşluk */
+            width: 100%;
+            max-width: 500px; /* Geniş ekranlarda çok yayılmasın */
+            margin-top: 20px;
+        }
+
+        #answer-input {
+            flex-grow: 1; /* Esneyerek boşluğu doldurur */
+            padding: 12px 18px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #answer-input:focus {
+            outline: none;
+            border-color: #5b6dff;
+        }
+    </style>
+</head>
+<body class="renk-siralama-body">
+
+    <header class="dashboard-header">
+        <div class="container">
+            <a href="/" class="logo">Let<span>Step</span></a>
+            <nav class="dashboard-nav">
+                <a href="/dashboard"><i class="fas fa-th-large"></i> Kontrol Paneli</a>
+                <a href="/exercises" class="active"><i class="fas fa-gamepad"></i> Egzersizler</a>
+            </nav>
+            <a href="/exercises" class="btn btn-secondary">Geri Dön</a>
+        </div>
+    </header>
+        <main class="exercise-main">
+        <div id="level-selection" class="level-selection">
+                <h2>Hangi seviyede egzersiz yapmak istiyorsun?</h2>
+                <div class="level-buttons">
+                    <button id="btn-ilkokul" class="btn btn-primary">İlkokul</button>
+                    <button id="btn-ortaokul" class="btn btn-primary">Ortaokul</button>
+                </div>
+        </div>
+        <div id="exercise-container" class="exercise-container">
+            <div class="progress-area">
+                <div id="progress-text" class="progress-text">Soru 1 / 10</div>
+                <div class="progress-bar-container"><div id="progress-bar" class="progress-bar"></div></div>
+                <div id="score-display" class="score-display"><i class="fas fa-star"></i> Skor: 0</div>
+            </div>
+            <div class="question-area">
+                <div id="question-image-container">
+                    <img id="question-image" src="" alt="Soru Görseli">
+                </div>
+                <div id="question-word" class="question-word" style="font-size:1.5rem;"></div>
+            </div>
+
+            <!-- İlkokul için butonlar -->
+            <div id="image-options-grid" class="image-options-grid"></div>
+
+            <!-- ✨ YENİ: Ortaokul için giriş alanı -->
+            <div id="input-answer-area" class="input-answer-area" style="display: none;">
+                <input type="text" id="answer-input" placeholder="Cevabınızı buraya yazın...">
+                <button id="submit-input-answer-btn" class="btn btn-primary">Cevapla</button>
+            </div>
+
+            <div id="feedback-message" class="feedback-message"></div>
+        </div>
+        <div id="results-screen" class="results-screen" style="display: none;">
+            <div class="results-box">
+                <h2>Egzersiz Tamamlandı!</h2>
+                <p id="final-score-message">Harika iş çıkardın!</p>
+                <div class="results-buttons">
+                    <button id="restart-button" class="btn btn-primary">Tekrar Oyna</button>
+                    <a href="/exercises" class="btn btn-secondary">Diğer Egzersizler</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/anlam_bagdastir.js"></script>
+</body>
+</html>

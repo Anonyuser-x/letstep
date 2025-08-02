@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yön Takibi | LetStep</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/egzersiz.css">
+    <style>
+        /* Soru ve görseli içeren ana alanı dikey ve ortalı bir yapıya sokuyoruz. */
+        .question-area {
+            display: flex;
+            flex-direction: column; /* Öğeleri yukarıdan aşağıya sıralar */
+            align-items: center;   /* Öğeleri yatayda ortalar */
+            margin-bottom: 25px;   /* Seçeneklerle arasına boşluk koyar */
+        }
+
+        /* Görseli tutan konteyner. Sabit bir boyut ve görünüm veriyoruz. */
+        #question-image-container {
+            width: 500px;        /* Sabit genişlik */
+            height: 300px;       /* Sabit yükseklik (kare bir alan) */
+            margin-bottom: 25px; /* Görsel ile soru metni arasına boşluk koyar */
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;    /* Taşan pikselleri (resim kenarları) gizler ki border-radius çalışsın */
+            background-color: #f0f2f5; /* Resim yüklenene kadar görünen arka plan rengi */
+
+            /* Başlangıçta gizli olacak, JS ile görünür yapılacak */
+            display: none;
+        }
+
+        /* Konteynerin içindeki asıl resim etiketi. */
+        #question-image {
+            width: 100%;
+            height: 100%;
+            /* En önemli kısım: Resmi bozmadan konteyneri doldurmasını sağlar. */
+            object-fit: cover;
+        }
+
+        /* Soru metninin kendisi. */
+        .question-word {
+            text-align: center; /* Metin birden fazla satıra taşarsa ortalı dursun */
+        }
+    </style>
+</head>
+<body class="renk-siralama-body">
+
+    <header class="dashboard-header">
+        <div class="container">
+            <a href="/" class="logo">Let<span>Step</span></a>
+            <nav class="dashboard-nav">
+                <a href="/dashboard"><i class="fas fa-th-large"></i> Kontrol Paneli</a>
+                <a href="/exercises" class="active"><i class="fas fa-gamepad"></i> Egzersizler</a>
+            </nav>
+            <a href="/exercises" class="btn btn-secondary">Geri Dön</a>
+        </div>
+    </header>
+        <main class="exercise-main">
+        <div id="level-selection" class="level-selection">
+                <h2>Hangi seviyede egzersiz yapmak istiyorsun?</h2>
+                <div class="level-buttons">
+                    <button id="btn-ilkokul" class="btn btn-primary">İlkokul</button>
+                    <button id="btn-ortaokul" class="btn btn-primary">Ortaokul</button>
+                </div>
+        </div>
+        <div id="exercise-container" class="exercise-container">
+            <div class="progress-area">
+                <div id="progress-text" class="progress-text">Soru 1 / 10</div>
+                <div class="progress-bar-container"><div id="progress-bar" class="progress-bar"></div></div>
+                <div id="score-display" class="score-display"><i class="fas fa-star"></i> Skor: 0</div>
+            </div>
+            <div class="question-area">
+                <!-- Görsel Konteyneri (Soru metninden önce geliyor) -->
+                <div id="question-image-container">
+                    <img id="question-image" src="" alt="Soru Görseli">
+                </div>
+                <!-- Soru Metni -->
+                <div id="question-word" class="question-word" style="font-size:1.5rem;"></div>
+            </div>
+
+
+                <div id="image-options-grid" class="image-options-grid">
+
+                </div>
+            <div id="feedback-message" class="feedback-message"></div>
+        </div>
+        <div id="results-screen" class="results-screen" style="display: none;">
+            <div class="results-box">
+                <h2>Egzersiz Tamamlandı!</h2>
+                <p id="final-score-message">Harika iş çıkardın!</p>
+                <div class="results-buttons">
+                    <button id="restart-button" class="btn btn-primary">Tekrar Oyna</button>
+                    <a href="/exercises" class="btn btn-secondary">Diğer Egzersizler</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/yon_takibi.js"></script>
+</body>
+</html>

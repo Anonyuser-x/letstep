@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoş Geldin! | LetStep</title>
+    <link rel="stylesheet" href="/static/css/ai.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="dashboard-header">
+            <div class="container">
+                <a href="/" class="logo">Let<span>Step</span></a>
+                <nav class="dashboard-nav">
+                    <a href="/flashcard"><i class="fas fa-layer-group"></i> Kelime Asistanı</a>
+                    <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Kontrol Paneli</a>
+                    <a href="https://www.cartoonnetwork.com.tr/izle" target="_blank"><i class="fas fa-tv"></i> Çizgi Film İzle</a>
+                </nav>
+                <div class="user-menu-container">
+                    <button id="user-menu-button" class="user-menu-button">Maceracı Hesabı <i class="fas fa-chevron-down"></i></button>
+                    <div id="user-menu-dropdown" class="user-menu-dropdown">
+                        <a href="/security-settings"><i class="fas fa-cog"></i> Güvenlik Ayarları</a>
+                        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="header-placeholder"></div>
+
+        <main>
+            <div class="content-grid">
+                <!-- Kart 1: JS'in tanıması için ID'ye sahip -->
+                <div class="nav-card" id="navigateToPlanner">
+                    <div class="nav-card-icon">🗓️</div>
+                    <h2>Yönetim Paneli & Haftalık Plan</h2>
+                    <p>Yapay zekanın hazırladığı haftalık planı gör, düzenle veya tamamen kendi planını oluştur.</p>
+                    <a href="/ai-weekly" class="nav-button">Haftalık Plana Git</a>
+                </div>
+                <!-- Kart 2: Anlık Öneriler Sayfasına Yönlendirme -->
+                <div class="nav-card" id="navigateToInstantRecs">
+                    <div class="nav-card-icon">💡</div>
+                    <h2>Anlık Yapay Zeka Önerileri</h2>
+                    <p>Sadece bugüne odaklan! Yapay zekanın sana özel hazırladığı görevleri gör ve tamamla.</p>
+                    <a href="/ai-recommendation" class="nav-button">Günlük Önerileri Gör</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/menus.js"></script>
+    <script src="/static/js/ai.js"></script>
+</body>
+</html>

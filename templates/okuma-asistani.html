@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okuma Asistanı | LetStep</title>
+    
+    <!-- Gerekli Font ve İkon Kütüphaneleri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Ana CSS Dosyamız -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="assistant-body">
+
+    <!-- Header (Dashboard ile aynı) -->
+    <header class="dashboard-header">
+        <div class="container">
+            <a href="/" class="logo">Let<span>Step</span></a>
+            <nav class="dashboard-nav">
+                <a href="/dashboard"><i class="fas fa-th-large"></i> Kontrol Paneli</a>
+                <a href="https://www.cartoonnetwork.com.tr/izle" target="_blank"><i class="fas fa-tv"></i> Çizgi Film İzle</a>
+            </nav>
+            <div class="user-menu-container">
+                <button id="user-menu-button" class="user-menu-button">
+                    <span id="user-menu-username">Kullanıcı</span>
+                </button>
+                <div id="user-menu-dropdown" class="user-menu-dropdown">
+                    <a href="/security-settings"><i class="fas fa-cog"></i> Güvenlik Ayarları</a>
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- OKUMA ASİSTANI ANA BÖLÜMÜ -->
+    <main class="assistant-main">
+        <div class="container assistant-container">
+            <div class="assistant-header">
+                <h2>Okuma Asistanı</h2>
+                <div class="navigation-controls">
+                    <div id="paragraph-display" class="paragraph-box">
+                        <button id="prev-text" class="nav-btn"><i class="fas fa-arrow-left"></i></button>
+                            <p id="paragraph-text">Metin yükleniyor...</p>
+                        <button id="next-text" class="nav-btn"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DÜZENLENMİŞ KONTROL BUTONLARI VE DURUM ALANI -->
+            <div class="controls">
+                <!-- Başlangıçta sadece bu görünür -->
+                <button id="start-btn" class="btn btn-primary"><i class="fas fa-microphone"></i> Kaydı Başlat</button>
+
+                <!-- Kayıt sırasında görünür -->
+                <button id="stop-btn" class="btn btn-danger" hidden><i class="fas fa-stop"></i> Kaydı Durdur</button>
+
+                <!-- Kayıt durdurulduğunda görünür -->
+                <button id="send-btn" class="btn btn-success" hidden><i class="fas fa-paper-plane"></i> Kaydı Gönder</button>
+                <button id="reset-btn" class="btn btn-secondary" hidden><i class="fas fa-redo"></i> Tekrar Kaydet</button>
+
+                <p id="status" class="status-text">Durum: Başlamak için butona basın.</p>
+            </div>
+            
+            <!-- Sonuçların Gösterileceği Alan -->
+            <div class="results-container">
+                <h3>Değerlendirme Sonucu</h3>
+                <div id="result-text" class="paragraph-box result-box">
+                    <p>Okumayı tamamladıktan sonra sonucunuz burada görünecektir.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bu sayfaya özel JavaScript dosyası -->
+    <script src="/static/js/assistant.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/menus.js"></script>
+</body>
+</html>
