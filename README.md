@@ -1,3 +1,7 @@
+
+![letstep](https://github.com/user-attachments/assets/da3f7c21-645b-4a9b-8bbe-2b8dff560562)
+
+
 🎯 Proje Amacı
 
 LetStep, bireylerin dijital, zihinsel ve sosyal gelişimlerini desteklemek için geliştirilmiştir.
