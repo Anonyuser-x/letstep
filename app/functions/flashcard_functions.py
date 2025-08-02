@@ -4,9 +4,6 @@ import logging
 from app.models.reading_text_data import ReadingTextData
 
 
-# --- YARDIMCI FONKSİYONLAR ---
-# Bu fonksiyon, orijinal JS kodundaki mantığın Python versiyonudur.
-# İki kelime arasındaki benzerliği hesaplamak için kullanılır.
 def get_edit_distance(s1: str, s2: str) -> int:
     """Levenshtein mesafesini hesaplar."""
     if len(s1) < len(s2):
@@ -44,7 +41,6 @@ def calculate_difficulty_for_word(correct_word: str, user_word: str) -> str:
     return "hard"
 
 
-# --- ANA FONKSİYONLAR ---
 async def get_unresolved_flashcards(db: AsyncSession, user_id: int) -> list:
     """
     Kullanıcının çözülmemiş kelimelerini flashcard'a dönüştürür.
@@ -63,33 +59,26 @@ async def get_unresolved_flashcards(db: AsyncSession, user_id: int) -> list:
     all_flashcards = []
 
     for row in db_rows:
-        # Ana liste olan "yanlış söylenen kelimeler" her zaman dolu olmalı.
         if not row.yanlış_söylenen_kelimeler:
             logging.warning(f"DB Satır ID {row.id} atlanıyor: 'yanlış_söylenen_kelimeler' alanı boş.")
             continue
 
         incorrect_words = [word.strip() for word in row.yanlış_söylenen_kelimeler.split(',') if word.strip()]
 
-        # --- İSTEDİĞİNİZ YENİ MANTIK BURADA ---
         dogru_kelimeler_str = row.yanlış_kelimelerin_yerine_söylenen_kelimeler
 
-        # Senaryo 2: Eğer 'doğru kelimeler' alanı boşsa, doğru listesi de yanlış listesinin aynısı olsun.
         if not dogru_kelimeler_str:
             logging.info(f"DB Satır ID {row.id}: Doğru kelime listesi boş. Yanlış kelimeler pratik edilecek.")
             correct_words = incorrect_words
         else:
-            # Senaryo 1: 'Doğru kelimeler' alanı doluysa, onu kullan.
             correct_words = [w.strip() for w in dogru_kelimeler_str.split(',') if w.strip()]
-            # Veri tutarlılığı için sayıların eşleştiğini kontrol et
             if len(incorrect_words) != len(correct_words):
                 logging.error(f"DB Satır ID {row.id} atlanıyor: Kelime sayıları eşleşmiyor.")
                 continue
 
-        # --- KART OLUŞTURMA (Artık her iki liste de dolu ve eşit uzunlukta) ---
         for index, (user_word, correct_word) in enumerate(zip(incorrect_words, correct_words)):
             unique_card_id = f"{row.id}-{index}"
 
-            # Eğer kelimeler aynıysa (Senaryo 2 durumu), zorluk "kolay" ve benzerlik %100 olur.
             difficulty = calculate_difficulty_for_word(correct_word, user_word)
             similarity = round(calculate_similarity(correct_word, user_word) * 100)
 
@@ -129,33 +118,26 @@ async def mark_word_as_resolved(db: AsyncSession, db_row_id: int, word_index: in
 
     incorrect_list = [word.strip() for word in card_row.yanlış_söylenen_kelimeler.split(',') if word.strip()]
 
-    # 'Doğru kelimeler' listesi boş olabilir, bu durumu yönet
     correct_list_str = card_row.yanlış_kelimelerin_yerine_söylenen_kelimeler
     correct_list = [w.strip() for w in correct_list_str.split(',') if w.strip()] if correct_list_str else []
 
-    # Verilen index'in geçerli bir aralıkta olup olmadığını kontrol et
     if not (0 <= word_index < len(incorrect_list)):
         logging.error(f"Geçersiz index: Kayıtta {len(incorrect_list)} kelime var, ama index {word_index} istendi.")
         return False
 
-    # İlgili indeksteki kelimeyi her iki listeden de (eğer varsa) kaldır
     removed_incorrect_word = incorrect_list.pop(word_index)
 
-    # Eğer correct_list varsa ve index geçerliyse oradan da kaldır
     if 0 <= word_index < len(correct_list):
         correct_list.pop(word_index)
 
     logging.info(f"'{removed_incorrect_word}' kelimesi kayıttan kaldırıldı. Kalan kelime sayısı: {len(incorrect_list)}")
 
-    # --- YENİ KONTROL MANTIĞI ---
-    # Eğer 'incorrect_list' (ana liste) boşaldıysa, görevi tamamlandı olarak işaretle.
     if not incorrect_list:
         logging.info(f"DB Satır ID {db_row_id} için tüm kelimeler çözüldü. Kayıt kapatılıyor.")
         card_row.is_resolved_data = True
         card_row.yanlış_söylenen_kelimeler = ""
         card_row.yanlış_kelimelerin_yerine_söylenen_kelimeler = ""
     else:
-        # Eğer hala çözülecek kelimeler varsa, listelerin yeni hallerini string'e çevirip kaydet.
         card_row.yanlış_söylenen_kelimeler = ", ".join(incorrect_list)
         card_row.yanlış_kelimelerin_yerine_söylenen_kelimeler = ", ".join(correct_list)
 
