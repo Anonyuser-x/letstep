@@ -64,9 +64,6 @@ async def delete_student_association(
     db: AsyncSession = Depends(get_async_db),
     current_teacher: User = Depends(get_current_teacher_user)
 ):
-    """
-    Bir öğrenciyi öğretmenin listesinden kaldırır.
-    """
     await teacher_functions.remove_student_from_teacher_list(
         db=db,
         teacher=current_teacher,
