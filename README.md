@@ -113,4 +113,5 @@ LetStep, eğitimciler ve aileler için bireysel gelişim takibi sunar:
 Bu proje bir bootcamp projesi kapsamında sosyal fayda amacıyla geliştirilmiştir.
 
 --   👤 Geliştirici: Letstep Proje Ekibi
+--   ▶️YouTube🔴 https://www.youtube.com/@LetStep69
 
