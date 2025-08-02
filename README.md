@@ -4,82 +4,81 @@ LetStep, bireylerin dijital, zihinsel ve sosyal gelişimlerini desteklemek için
 
 🧩 Uygulama içerisinde:
 
-🔤 Okuma & yazma egzersizleri
+--   🔤 Okuma & yazma egzersizleri
 
-🧠 Dikkat, hafıza ve eşleştirme oyunları
+--   🧠 Dikkat, hafıza ve eşleştirme oyunları
 
-🎧 Sesli içerik (Whisper & ffmpeg entegrasyonu)
+--   🎧 Sesli içerik (Whisper & ffmpeg entegrasyonu)
 
-👨‍👩‍👧‍👦 Ebeveyn & öğretmen içerik paylaşımı 
+--   👨‍👩‍👧‍👦 Ebeveyn & öğretmen içerik paylaşımı 
 
-📊 Streamlit + Plotly ile görsel analizler
+--   📊 Streamlit + Plotly ile görsel analizler
 
 👥 Hedef Kitle
 
-👶 Öğrenciler
+--   👶 Öğrenciler
 
-👩‍🏫 Öğretmenler
+--   👩‍🏫 Öğretmenler
 
-👨‍👩‍👧‍👦 Aileler
+--   👨‍👩‍👧‍👦 Aileler
 
 Nöroçeşitliliğe sahip bireyler ve onlara destek olan herkes için.
 
 
 
-
-
 🧩 Teknoloji Yığını
 
-📦 Backend     : FastAPI, SQLAlchemy, Alembic
+--   📦 Backend     : FastAPI, SQLAlchemy, Alembic
 
-🗃️ Veritabanı  : SQLite
+--   🗃️ Veritabanı  : SQLite
 
-🎨 Frontend    : HTML, CSS, JavaScript (vanilla)
+--   🎨 Frontend    : HTML, CSS, JavaScript (vanilla)
 
-🔐 Kimlik      : JWT, Passlib, Bcrypt, OAuth
+--   🔐 Kimlik      : JWT, Passlib, Bcrypt, OAuth
 
-📤 E-posta     : FastAPI-Mail
+--   📤 E-posta     : FastAPI-Mail
 
-🧠 AI Ses İşleme : openai-whisper, ffmpeg, pydub
+--   🧠 AI Ses İşleme : openai-whisper, ffmpeg, pydub
 
-📊 Görselleştirme: Streamlit, Plotly, Pandas
+--   📊 Görselleştirme: Streamlit, Plotly, Pandas
 
 
 ⚙️ Gereksinimler
 
-✅ Python 3.11+
+--   ✅ Python 3.11+
 
-✅ ffmpeg (media işlemleri için) (https://ffmpeg.org/download.html)
+--   ✅ ffmpeg (media işlemleri için) (https://ffmpeg.org/download.html)
 
-🔗 Windows & Ubuntu / Debian  & macOS lütfen işletim sisteminize uygun ffmpeg paketini kurunuz.
+--   🔗 Windows & Ubuntu / Debian  & macOS lütfen işletim sisteminize uygun ffmpeg paketini kurunuz.
 
 
 
 🚀 Kurulum Adımları
 
 # 1. Reposu klonla
-git clone https://github.com/Anonyuser-x/letstep.git
-cd letstep
+--   git clone https://github.com/Anonyuser-x/letstep.git
+--   cd letstep
 
 # 2. Sanal ortam oluştur
-python -m venv .venv
+--   python -m venv .venv
+
 # Windows:
-.venv\Scripts\activate
+--   .venv\Scripts\activate
+
 # Linux/macOS:
-source .venv/bin/activate
+--   source .venv/bin/activate
 
 # 3. Gereksinimleri yükle
-pip install -r requirements.txt
+--   pip install -r requirements.txt
 
-ffmpeg yüklediğinizi ve ana klasör
-içerisinde tuttuğunuzdan emin olun
+--   ffmpeg paketini yüklediğinizi ve ana klasör içerisinde tuttuğunuzdan emin olun
 
 # 4. Ortam dosyasını oluştur
-cp .config.env.example .config.env
-# .config.env içeriğini kendine göre düzenle
+--   cp .config.env.example .config.env
+--   # .config.env içeriğini kendine göre düzenle
 
 # 5. Uygulamayı başlat
-uvicorn main:app --reload
+--   uvicorn main:app --reload
 
 📁 Dosya Yapısı
 
@@ -99,15 +98,15 @@ uvicorn main:app --reload
 
 LetStep, eğitimciler ve aileler için bireysel gelişim takibi sunar:
 
-📊 Streamlit paneli ile gelişim grafikleri
+--   📊 Streamlit paneli ile gelişim grafikleri
 
-📌 Plotly ile interaktif analizler
+--   📌 Plotly ile interaktif analizler
 
-📑 Pandas ile veritabanı işleme yeteneği
+--   📑 Pandas ile veritabanı işleme yeteneği
 
-🤝 Katkı & İletişim
+--   🤝 Katkı & İletişim
 
 Bu proje bir bootcamp projesi kapsamında sosyal fayda amacıyla geliştirilmiştir.
 
-👤 Geliştirici: Letstep Proje Ekibi
+--   👤 Geliştirici: Letstep Proje Ekibi
 
