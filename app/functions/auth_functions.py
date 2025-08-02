@@ -3,8 +3,6 @@ from sqlalchemy import select, or_
 from fastapi import HTTPException, status
 from fastapi.responses import JSONResponse
 from app.config import conf
-# --- GÜNCELLENDİ ---
-# Modelimizden UserRole Enum'ını da import ediyoruz.
 from app.models import User, UserRole
 from app.schemas import UserCreate, LoginRequest, EmailSchema, PasswordResetSchema
 from app.utils import (
@@ -13,9 +11,7 @@ from app.utils import (
     create_password_reset_token, verify_password_reset_token)
 from fastapi_mail import FastMail, MessageSchema
 
-# --- YENİDEN ADLANDIRILDI ---
-# Bu fonksiyon artık spesifik olarak öğrenci kaydı için kullanılacak.
-# Kodun okunabilirliği için adını değiştirmek iyi bir pratiktir.
+
 async def register_student(db: AsyncSession, user_data: UserCreate) -> User:
     if not is_valid_email(user_data.email):
         raise BadRequestException("Geçersiz email adresi.")
@@ -35,7 +31,6 @@ async def register_student(db: AsyncSession, user_data: UserCreate) -> User:
         email=user_data.email,
         hashed_password=hashed_pwd,
         age=user_data.age
-        # role alanı modeldeki default='student' sayesinde otomatik atanacak.
     )
 
     db.add(new_user)
@@ -43,10 +38,7 @@ async def register_student(db: AsyncSession, user_data: UserCreate) -> User:
     await db.refresh(new_user)
     return new_user
 
-# --- YENİ EKLENDİ ---
-# Öğretmen kaydı için yeni fonksiyonumuz.
 async def register_teacher(db: AsyncSession, user_data: UserCreate) -> User:
-    # Bütün doğrulamalar öğrenci kaydı ile aynı.
     if not is_valid_email(user_data.email):
         raise BadRequestException("Geçersiz email adresi.")
     if not is_strong_password(user_data.password):
@@ -60,13 +52,12 @@ async def register_teacher(db: AsyncSession, user_data: UserCreate) -> User:
     from app.utils.security import hash_password
     hashed_pwd = hash_password(user_data.password)
 
-    # TEK FARK BURADA! Rolü manuel olarak 'teacher' olarak belirliyoruz.
     new_user = User(
         username=user_data.username,
         email=user_data.email,
         hashed_password=hashed_pwd,
-        age=user_data.age, # Öğretmen için yaş zorunlu olmayabilir, şemada opsiyonel bırakılabilir.
-        role=UserRole.teacher # Rolü açıkça belirtiyoruz.
+        age=user_data.age, 
+        role=UserRole.teacher 
     )
 
     db.add(new_user)
@@ -88,9 +79,7 @@ async def process_user_login(db: AsyncSession, login_data: LoginRequest) -> dict
             detail="Kullanıcı adı veya şifre hatalı"
         )
 
-    # --- KRİTİK GÜNCELLEME ---
-    # Token oluştururken payload'a (içeriğe) kullanıcının rolünü de ekliyoruz.
-    # user.role bir Enum nesnesi olduğu için .value ile string değerini ("student", "teacher") alıyoruz.
+
     token_data = {
         "sub": str(user.id),
         "username": user.username,
@@ -103,17 +92,15 @@ async def process_user_login(db: AsyncSession, login_data: LoginRequest) -> dict
         key="access_token",
         value=token,
         httponly=True,
-        max_age=1800, # 30 dakika
+        max_age=1800, 
         samesite="lax",
-        secure=False # Production'da True olmalı (HTTPS için)
+        secure=False 
     )
 
     return response
 
-# --- Şifre sıfırlama fonksiyonları aynı kalabilir, onlarda değişiklik gerekmiyor. ---
 
 async def send_password_reset_email(email: str, token: str):
-    # Bu fonksiyon içeriği aynı kalabilir
     reset_url = f"http://localhost:8000/reset-password?token={token}"
     html = html = f"""
 <!DOCTYPE html>
@@ -173,13 +160,11 @@ async def send_password_reset_email(email: str, token: str):
   </body>
 </html>
 """
- # HTML içeriğiniz aynı
     message = MessageSchema(subject="LetStep Şifre Sıfırlama", recipients=[email], body=html, subtype="html")
     fm = FastMail(conf)
     await fm.send_message(message)
 
 async def process_forgot_password(db: AsyncSession, email_data: EmailSchema):
-    # Bu fonksiyon içeriği aynı kalabilir
     user = await db.execute(select(User).where(User.email == email_data.email))
     user = user.scalar_one_or_none()
     if not user:
@@ -189,7 +174,6 @@ async def process_forgot_password(db: AsyncSession, email_data: EmailSchema):
     return {"message": "Eğer bu email adresi sistemde kayıtlıysa, şifre sıfırlama linki gönderildi."}
 
 async def process_password_reset(db: AsyncSession, token: str, new_password_data: PasswordResetSchema):
-    # Bu fonksiyon içeriği aynı kalabilir
     email = verify_password_reset_token(token)
     if not email:
         raise HTTPException(status_code=400, detail="Geçersiz veya süresi dolmuş token.")
