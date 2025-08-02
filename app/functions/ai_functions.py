@@ -5,14 +5,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException, status
 import google.generativeai as genai
 from sqlalchemy import and_
-# Modelleri import ediyoruz
 from app.models import Exercise, UserActivity, WeeklyPlan, User, PlanTask,DailyTask
 from app.config import settings
 
-# API Anahtarını ve modeli yapılandırıyoruz
 GEMINI_API_KEY = settings.GOOGLE_API_KEY
 genai.configure(api_key=GEMINI_API_KEY)
-AI_MODEL_NAME = 'gemini-2.5-pro'  # Çalışan modeli merkezi bir değişkene alıyoruz
+AI_MODEL_NAME = 'gemini-2.5-pro'  
 
 
 async def generate_weekly_plan_service(user: User, db: AsyncSession):
@@ -29,7 +27,6 @@ async def generate_weekly_plan_service(user: User, db: AsyncSession):
     exercise_result = await db.execute(select(Exercise))
     all_exercises = ", ".join([f"{e.game_type} ({e.category})" for e in exercise_result.scalars().all()])
 
-    # Prompt, sadece ve sadece JSON döndürmesi için güncellendi.
     prompt = f"""
     Bir öğrenci için haftalık çalışma programı oluştur. Öğrencinin geçmiş aktiviteleri şunlardır:
     {[{'game_type': act.game_type, 'is_resolved': act.is_resolved, 'wrong_type': act.wrong_type} for act in user_activities]}
@@ -52,7 +49,6 @@ async def generate_weekly_plan_service(user: User, db: AsyncSession):
     """
     try:
         model = genai.GenerativeModel(AI_MODEL_NAME)
-        # AI'ın JSON formatında cevap vermesini zorunlu kıl
         response = await model.generate_content_async(
             prompt,
             generation_config=genai.types.GenerationConfig(
@@ -98,7 +94,6 @@ async def get_or_create_daily_tasks_service(user: User, db: AsyncSession):
     """
     today = date.today()
 
-    # Bugün oluşturulmuş görev var mı diye kontrol et
     query = select(DailyTask).filter(
         DailyTask.user_id == user.id,
         and_(
@@ -111,14 +106,12 @@ async def get_or_create_daily_tasks_service(user: User, db: AsyncSession):
     existing_tasks = result.scalars().all()
 
     if existing_tasks:
-        return existing_tasks  # Eğer görevler varsa, direkt onları döndür
+        return existing_tasks  
 
-    # Eğer görev yoksa yeni görevler oluştur
     activity_result = await db.execute(select(UserActivity).filter(UserActivity.user_id == user.id).limit(20))
     user_activities = activity_result.scalars().all()
 
     if not user_activities:
-        # Aktivite yoksa genel başlangıç görevleri oluştur
         tasks_list = [
             "Bugün hedeflerini gözden geçir.",
             "10 dakika yürüyüş yap.",
@@ -126,7 +119,6 @@ async def get_or_create_daily_tasks_service(user: User, db: AsyncSession):
             "Kendine sağlıklı bir atıştırmalık hazırla."
         ]
     else:
-        # Aktivite varsa, yapay zekadan görev iste
         prompt = f"""
         Öğrencinin son aktivitelerine göre, onun eksiklerini kapatacak, öğrenme motivasyonunu artıracak ve gelişimini destekleyecek 4 adet kısa, eyleme geçirilebilir ve motive edici günlük görev oluştur.
 
@@ -166,12 +158,10 @@ async def get_or_create_daily_tasks_service(user: User, db: AsyncSession):
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                                 detail=f"Yapay zeka ile görev oluşturulurken bir hata oluştu: {str(e)}")
 
-    # Yeni görevleri veritabanına kaydet
     new_tasks = [DailyTask(user_id=user.id, description=desc) for desc in tasks_list]
     db.add_all(new_tasks)
     await db.commit()
 
-    # Kaydedilen görevleri geri döndür
     for task in new_tasks:
         await db.refresh(task)
 
