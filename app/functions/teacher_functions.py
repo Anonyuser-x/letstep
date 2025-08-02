@@ -72,7 +72,6 @@ async def remove_student_from_teacher_list(db: AsyncSession, teacher: User, stud
     """
     Belirtilen öğrenciyi, öğretmenin öğrenci listesinden kaldırır.
     """
-    # Önce öğrencinin var olup olmadığını ve bu öğretmene ait olup olmadığını kontrol et
     await db.refresh(teacher, attribute_names=['students'])
 
     student_to_remove = None
@@ -82,13 +81,10 @@ async def remove_student_from_teacher_list(db: AsyncSession, teacher: User, stud
             break
 
     if not student_to_remove:
-        # Eğer öğrenci bulunamazsa veya öğretmene ait değilse, hata döndür.
         raise HTTPException(status_code=404, detail="Öğrenci bulunamadı veya size atanmamış.")
 
-    # Öğrenciyi öğretmenin listesinden kaldır
     teacher.students.remove(student_to_remove)
 
-    # Değişiklikleri veritabanına işle
     await db.commit()
 
-    return  # Başarılı olunca bir şey döndürmeye gerek yok
+    return  
