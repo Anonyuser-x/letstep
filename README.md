@@ -87,14 +87,23 @@ Nöroçeşitliliğe sahip bireyler ve onlara destek olan herkes için.
 📁 Dosya Yapısı
 
 📁 alembic/             # Gerekli migrationlar ve veritabanı güncellemeleri
+
 📁 app/                 # FastAPI backend (main.py, routers, db vb.)
+
 📁 ffmpeg/              # Ses işlemesi için gerekli yazılım 
+
 📁 static/              # CSS, JS dosyaları
+
 📁 templates/           # HTML sayfaları (Jinja2)
+
 📄 database.db          # Veritabanı (örnek içeriklerle birlikte)
+
 📄 requirements.txt     # Bağımlılık listesi
+
 📄 .env                 # Ortam değişkenleri (kişisel - gitignore'da)
+
 📄 .config.env.example  # Örnek ortam dosyası (repoya dahil)
+
 📄 README.md            # Proje açıklaması
 
 
